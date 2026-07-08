@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-07-08
+
+### Added
+- Completed **Debug Tools (DBG)** module containing 11 essential debugging tools:
+  - Output Comparer comparing expected against candidate output files with newline ignore options.
+  - Line Difference highlighting correct, missing, extra, or modified lines with visibility toggles.
+  - Character Difference pinpointing first mismatch character index, line number, column, and ASCII code.
+  - Frequency Comparator contrast count occurrences for integers, characters, or words between datasets.
+  - Sort Checker validating ascending/descending sorting strictly or non-strictly with index indicators.
+  - Duplicate Finder scanning duplicate frequencies and index offsets.
+  - Array Shuffler randomizing arrays using Fisher-Yates with LCG deterministic seeds.
+  - Whitespace Checker scanning trailing spaces, tabs, mixed indents, and duplicate newlines.
+  - Input Validator checking constraints limits for strings, vectors, and matrices.
+  - Stress Test (MVP) comparison station matching outputs from brute force against optimized solvers.
+  - Memory Estimator estimating heap footprint limits in MB for C++ variables and containers.
+- Re-routed sidebar navigation maps from `/debug` to `/debug-tools`.
+- Shared debug components: `DiffViewer`, `InputEditor` with row line numbers gutter, and `OutputViewer`.
+
+---
+
 ## [0.2.0] - 2026-07-08
 
 ### Added

@@ -22,7 +22,16 @@ import {
   RefreshCw,
   Binary,
   FileCode2,
-  Cpu
+  Cpu,
+  ArrowLeftRight,
+  Rows,
+  BarChart2,
+  SortAsc,
+  Copy,
+  Shuffle,
+  AlignLeft,
+  FileCheck,
+  Play
 } from "lucide-react";
 
 export interface NavItem {
@@ -50,7 +59,24 @@ export const sidebarItems: NavItem[] = [
       { title: "Overflow Checker", href: "/contest-utilities/overflow-checker", icon: Cpu },
     ],
   },
-  { title: "Debug Tools", href: "/debug", icon: Bug },
+  {
+    title: "Debug Tools",
+    href: "/debug-tools",
+    icon: Bug,
+    children: [
+      { title: "Output Comparer", href: "/debug-tools/output-comparer", icon: ArrowLeftRight },
+      { title: "Line Difference", href: "/debug-tools/line-diff", icon: Rows },
+      { title: "Character Difference", href: "/debug-tools/character-diff", icon: Binary },
+      { title: "Frequency Comparator", href: "/debug-tools/frequency-compare", icon: BarChart2 },
+      { title: "Sort Checker", href: "/debug-tools/sort-checker", icon: SortAsc },
+      { title: "Duplicate Finder", href: "/debug-tools/duplicate-finder", icon: Copy },
+      { title: "Array Shuffler", href: "/debug-tools/shuffle-array", icon: Shuffle },
+      { title: "Whitespace Checker", href: "/debug-tools/whitespace-checker", icon: AlignLeft },
+      { title: "Input Validator", href: "/debug-tools/input-validator", icon: FileCheck },
+      { title: "Stress Test (MVP)", href: "/debug-tools/stress-test", icon: Play },
+      { title: "Memory Estimator", href: "/debug-tools/memory-estimator", icon: Cpu },
+    ],
+  },
   { title: "Test Generator", href: "/generator", icon: Sparkles },
   { title: "Strings", href: "/strings", icon: Hash },
   { title: "Number Theory", href: "/number-theory", icon: Percent },

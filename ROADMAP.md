@@ -16,17 +16,14 @@ This document outlines the planned release cycles, milestones, and upcoming algo
 
 ---
 
-## 🛠️ Phase 2: Contest Utilities & Debugging (Current Release - v0.2.0)
+## 🛠️ Phase 2: Contest Utilities & Debugging (Current Release - v0.3.0)
 *Goal: Integrate active calculators, references, and debugging helpers.*
 
-- [x] **Contest Utilities (CU)**: Complete 8 essential sub-tools (arithmetic, base conversions, logical operations, ASCII sheets, Roman translation, expression parsing, BigInt math, overflow bounds check).
+- [x] **Contest Utilities (v0.2.0)**: Complete 8 essential sub-tools (arithmetic, base conversions, logical operations, ASCII sheets, Roman translation, expression parsing, BigInt math, overflow bounds check).
+- [x] **Debug Tools (v0.3.0)**: Complete 11 essential sub-tools (Output Comparer, Line Diff, Character Diff, Frequency Comparator, Sort Checker, Duplicate Finder, Array Shuffler, Whitespace Checker, Input Validator, Stress Test Comparator, Memory Estimator).
 - [ ] **Contest Scrapers**:
   - [ ] Problem scrapers/parsers (Codeforces, AtCoder, CodeChef) to auto-download test case inputs/outputs.
   - [ ] Workspace template auto-generators supporting custom user macros.
-- [ ] **Debug Tools**:
-  - [ ] Standard Stress Tester (comparing brute-force vs. optimized solution output using randomized inputs).
-  - [ ] Diff Checker displaying inline output discrepancies.
-  - [ ] Performance Estimator checking time and memory complexities.
 
 ---
 

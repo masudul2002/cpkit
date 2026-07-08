@@ -14,13 +14,13 @@ To ensure a clean and modular architecture, features are isolated and lazy-loade
 
 ### 🟢 Available Foundation
 - **Contest Utilities (v0.2.0)**: Standard calculators, base conversion utilities, logical bit calculators, Roman-dec conversions, expression parsers, and searchable ASCII tables. See the [Contest Utilities Feature Docs](docs/features/contest-utilities.md) for full descriptions.
+- **Debug Tools (v0.3.0)**: Compare brute-force outputs, run diff validations (line/character diffs, whitespace check), scan duplicate frequencies, evaluate sort order, shuffle array test inputs, and estimate container memory usages. See the [Debug Tools Feature Docs](docs/features/debug-tools.md) for full descriptions.
 - **Responsive Layout Shell**: Collapsible workspace sidebar and header search links.
 - **Interactive Command Palette**: Global quick-actions launcher (triggered via `Cmd/Ctrl + K`) supporting theme cycling and route links.
 - **Tailwind Design System**: Global styling tokens, layout containers, custom scroll views, responsive dividers, and modal boxes.
 
 ### 🟡 Planned Modules (Phase 2 & 3)
 - **Contest Scrapers**: Parse test inputs from Codeforces, AtCoder, etc.
-- **Debug Tools**: Compare brute-force solutions with optimized approaches to identify corner cases (Stress Testing).
 - **Test Generator**: Generate random arrays, trees, grids, and weights.
 - **Quick Reference**: Formula cheatsheets and fast I/O macros.
 
