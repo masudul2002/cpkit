@@ -42,7 +42,7 @@ export default function Dashboard() {
     { title: "Graph", href: "/graph", count: "6 tools" },
     { title: "Tree", href: "/tree", count: "4 tools" },
     { title: "Dynamic Programming", href: "/dynamic-programming", count: "12 tools" },
-    { title: "Greedy Choice", href: "/greedy", count: "3 tools" },
+    { title: "Greedy Choice", href: "/greedy", count: "11 tools" },
     { title: "Geometry", href: "/geometry", count: "4 tools" },
   ];
 

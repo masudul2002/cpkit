@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-07-08
+
+### Added
+- Completed **Greedy Studio (GD)** module containing 11 tools:
+  - Reusable Timeline Chart visualizer displaying horizontal activity and platform intervals.
+  - Activity Selection and Interval Scheduling selecting maximum non-overlapping tasks.
+  - Fractional Knapsack filling knapsack fractionally by sorted value/weight densities.
+  - Job Sequencing scheduling jobs in deadlines slots by profit descending.
+  - Minimum Platforms calculating parallel platforms required at a station.
+  - Merge Intervals merging overlapping 1D segments.
+  - Huffman Coding building prefix trees and calculating compression ratios.
+  - Coin Greedy simulating local coin change selection failures vs optimal DP change.
+  - Gas Station finding start circular indexes under positive fuel tank constraints.
+  - Optimal Merge Pattern merging file sizes pairwise using priority queues.
+  - Load Balancing distributing task loads across identical processors.
+- Shared Greedy Studio layout components: `GdLayout`, `GdHeader`, and `EducationalPanel`.
+
+---
+
 ## [1.0.0] - 2026-07-08
 
 ### Added
