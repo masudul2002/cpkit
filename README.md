@@ -16,6 +16,7 @@ To ensure a clean and modular architecture, features are isolated and lazy-loade
 - **Contest Utilities (v0.2.0)**: Standard calculators, base conversion utilities, logical bit calculators, Roman-dec conversions, expression parsers, and searchable ASCII tables. See the [Contest Utilities Feature Docs](docs/features/contest-utilities.md) for full descriptions.
 - **Debug Tools (v0.3.0)**: Compare brute-force outputs, run diff validations (line/character diffs, whitespace check), scan duplicate frequencies, evaluate sort order, shuffle array test inputs, and estimate container memory usages. See the [Debug Tools Feature Docs](docs/features/debug-tools.md) for full descriptions.
 - **Test Generator (v0.4.0)**: Generate random integers, arrays, strings, matrix grids, permutations, graphs, tree topologies, queries, intervals, coordinates, preconfigured edge cases, custom constraint sets, and batch collections. See the [Test Generator Feature Docs](docs/features/test-generator.md) for full descriptions.
+- **Number Theory & Bits (v0.5.0)**: Verify primality, run prime sieves (Eratosthenes, Segmented range), decompose prime factorizations, compute divisor structures, solve GCD/LCM, Extended Euclid, modular exponentiation/inverses, Euler phi, Möbius values, CRT systems, Gray codes, prefix/range XORs, and bitwise logic operations. See the [Number Theory Feature Docs](docs/features/number-theory.md) for full descriptions.
 - **Responsive Layout Shell**: Collapsible workspace sidebar and header search links.
 - **Interactive Command Palette**: Global quick-actions launcher (triggered via `Cmd/Ctrl + K`) supporting theme cycling and route links.
 - **Tailwind Design System**: Global styling tokens, layout containers, custom scroll views, responsive dividers, and modal boxes.
@@ -26,7 +27,6 @@ To ensure a clean and modular architecture, features are isolated and lazy-loade
 
 ### 🔵 Future Library Extensions (Phase 4)
 - **Strings**: KMP matching, Trie structures, Z-Array, and Suffix automatons.
-- **Number Theory**: Prime sieves, modular inverse, and GCD algorithms.
 - **Matrix**: Exponentiation and Gaussian elimination.
 - **Graph & Tree**: LCA, Segment Trees, shortest paths, and max flows.
 - **Dynamic Programming**: Classic patterns and bitmask optimizations.

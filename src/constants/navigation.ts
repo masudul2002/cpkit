@@ -41,7 +41,12 @@ import {
   Compass,
   Zap,
   Sliders,
-  FolderSync
+  FolderSync,
+  ShieldCheck,
+  Divide,
+  GitCommit,
+  RotateCcw,
+  Columns
 } from "lucide-react";
 
 export interface NavItem {
@@ -107,8 +112,29 @@ export const sidebarItems: NavItem[] = [
       { title: "Batch Generator", href: "/test-generator/batch-generator", icon: FolderSync },
     ],
   },
+  {
+    title: "Number Theory",
+    href: "/number-theory",
+    icon: Percent,
+    children: [
+      { title: "Prime Checker", href: "/number-theory/prime-checker", icon: ShieldCheck },
+      { title: "Sieve of Eratosthenes", href: "/number-theory/sieve", icon: Layers },
+      { title: "Segmented Sieve", href: "/number-theory/segmented-sieve", icon: ListCollapse },
+      { title: "Prime Factorization", href: "/number-theory/factorization", icon: Binary },
+      { title: "Divisors Calculator", href: "/number-theory/divisors", icon: Divide },
+      { title: "GCD & LCM Calculator", href: "/number-theory/gcd-lcm", icon: GitCommit },
+      { title: "Extended Euclidean Solver", href: "/number-theory/extended-euclid", icon: Calculator },
+      { title: "Modular Exponentiation", href: "/number-theory/modular-exponentiation", icon: TrendingUp },
+      { title: "Modular Inverse Solver", href: "/number-theory/modular-inverse", icon: RotateCcw },
+      { title: "Euler Totient Solver", href: "/number-theory/euler-phi", icon: HelpCircle },
+      { title: "Möbius Function Solver", href: "/number-theory/mobius", icon: Sliders },
+      { title: "Chinese Remainder Theorem", href: "/number-theory/crt", icon: Columns },
+      { title: "Bitwise Playground", href: "/number-theory/bitwise-playground", icon: Cpu },
+      { title: "Gray Code Generator", href: "/number-theory/gray-code", icon: Shuffle },
+      { title: "XOR Playground", href: "/number-theory/xor-playground", icon: Zap },
+    ],
+  },
   { title: "Strings", href: "/strings", icon: Hash },
-  { title: "Number Theory", href: "/number-theory", icon: Percent },
   { title: "Matrix", href: "/matrix", icon: Table2 },
   { title: "Graph", href: "/graph", icon: Share2 },
   { title: "Tree", href: "/tree", icon: GitBranch },

@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-07-08
+
+### Added
+- Completed **Number Theory & Bits (NT)** module containing 15 mathematical tools:
+  - Prime Checker checking primality, nearest primes, and prime factor products.
+  - Sieve of Eratosthenes generating primes list up to N.
+  - Segmented Sieve generating range [L, R] primes up to 10^9.
+  - Prime Factorization decomposing integers into prime power exponents.
+  - Divisors Calculator listing sorted divisors, count, and sums.
+  - GCD & LCM computing greatest common divisors and least common multiples for multiple inputs.
+  - Extended Euclidean Solver returning GCD and Bezout coefficients (x, y) satisfying ax + by = gcd.
+  - Modular Exponentiation computing modular binary powers (A^B) % M with step traces.
+  - Modular Inverse Solver solving A^-1 mod M using Extended Euclid or Fermat's Little Theorem.
+  - Euler Totient Solver computing coprime counts phi(N).
+  - Mobius Function Solver computing mobius mu(N) values.
+  - Chinese Remainder Theorem solving systems of simultaneous congruences for coprime moduli.
+  - Bitwise Playground displaying AND, OR, XOR, shifts in decimal, hex, and binary grids.
+  - Gray Code Generator converting Binary <-> Gray code bidirectionally.
+  - XOR Playground calculating array prefix XORs and O(1) integer range XOR cycles.
+- Shared number-theory wrapper components: `NtLayout`, `NtHeader`, and `EducationalPanel` with conceptual tabs.
+
+---
+
 ## [0.4.0] - 2026-07-08
 
 ### Added
