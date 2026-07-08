@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2026-07-08
+
+### Added
+- Completed **Graph Laboratory (GR)** module containing 14 tools:
+  - Interactive SVG Graph Canvas editor with node dragging, edge weights, and directed/undirected configurations.
+  - BFS Traversal tracing FIFO queue orders and unweighted layer distances.
+  - DFS Traversal tracing recursive call stack exploration steps.
+  - Dijkstra Solver tracing weighted greedy relaxations and parent paths.
+  - Bellman-Ford Solver detecting negative weight cycles.
+  - Floyd-Warshall Matrix computing all-pairs shortest paths.
+  - Topological Sort running Kahn's in-degree queue algorithm.
+  - Prim's MST constructing greedily grown spanning trees.
+  - Kruskal's MST constructing sorted spanning edges via DSU.
+  - DSU / Union-Find tracing representatives and rank balances dynamically.
+  - Bipartite Checker two-coloring vertices and highlighting odd-cycle conflicts.
+  - Critical Bridges detecting cut-edges.
+  - Articulation Points detecting cut-vertices.
+  - Kosaraju SCC grouping strongly connected subgraphs via dual DFS.
+  - Graph Properties auditing densities, degree matrices, component sizes, cycle indicators, DAG and Tree checks.
+- Shared graph components: `GrLayout`, `GrHeader`, `EducationalPanel`, and `GraphCanvas`.
+
+---
+
 ## [0.7.0] - 2026-07-08
 
 ### Added

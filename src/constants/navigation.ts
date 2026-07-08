@@ -50,7 +50,11 @@ import {
   X,
   RotateCw,
   Droplet,
-  Navigation
+  Navigation,
+  Activity,
+  Bookmark,
+  Scissors,
+  FolderOpen
 } from "lucide-react";
 
 export interface NavItem {
@@ -182,7 +186,27 @@ export const sidebarItems: NavItem[] = [
       { title: "Pathfinding Grid", href: "/matrix/pathfinding", icon: Navigation },
     ],
   },
-  { title: "Graph", href: "/graph", icon: Share2 },
+  {
+    title: "Graph",
+    href: "/graph",
+    icon: Share2,
+    children: [
+      { title: "BFS Traversal", href: "/graph/bfs", icon: Network },
+      { title: "DFS Traversal", href: "/graph/dfs", icon: GitBranch },
+      { title: "Dijkstra Solver", href: "/graph/dijkstra", icon: Navigation },
+      { title: "Bellman-Ford Solver", href: "/graph/bellman-ford", icon: Activity },
+      { title: "Floyd-Warshall Matrix", href: "/graph/floyd-warshall", icon: Calculator },
+      { title: "Topological Sort", href: "/graph/topological-sort", icon: Layers },
+      { title: "Prim's MST", href: "/graph/prim", icon: TrendingUp },
+      { title: "Kruskal's MST", href: "/graph/kruskal", icon: Sliders },
+      { title: "DSU / Union-Find", href: "/graph/union-find", icon: Settings },
+      { title: "Bipartite Checker", href: "/graph/bipartite", icon: Bookmark },
+      { title: "Critical Bridges", href: "/graph/bridges", icon: Scissors },
+      { title: "Articulation Points", href: "/graph/articulation", icon: Share2 },
+      { title: "Kosaraju SCC", href: "/graph/scc", icon: FolderOpen },
+      { title: "Graph Properties", href: "/graph/graph-properties", icon: Calculator },
+    ],
+  },
   { title: "Tree", href: "/tree", icon: GitBranch },
   { title: "Dynamic Programming", href: "/dp", icon: Layers },
   { title: "Greedy", href: "/greedy", icon: Coins },
