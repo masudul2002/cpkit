@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-07-08
+
+### Added
+- Completed **Quick Reference Center (REF)** module:
+  - Searchable dashboard with instant fuzzy search filters.
+  - Interactive Big-O Complexity scale charts.
+  - Detailed STL reference sheets (`vector`, `PBDS`, etc.) detailing time/space bounds, examples, syntax, and warnings.
+  - Copyable competitive programming templates for C++, Python, Java, Go, and Rust.
+  - Compiler guide covering g++ and clang++ optimization flags (-O3, -Ofast).
+- Pinned and Bookmarked favorites toggles layout.
+
+---
+
 ## [1.3.0] - 2026-07-08
 
 ### Added

@@ -313,7 +313,7 @@ export const sidebarItems: NavItem[] = [
       { title: "Custom Comparator", href: "/sorting/custom-comparator", icon: Sliders },
     ],
   },
-  { title: "Quick Reference", href: "/quick-reference", icon: BookOpen },
+  { title: "Quick Reference", href: "/reference", icon: BookOpen },
   { title: "Favorites", href: "/favorites", icon: Star },
   { title: "Recent", href: "/recent", icon: Clock },
   { title: "Settings", href: "/settings", icon: Settings },

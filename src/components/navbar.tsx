@@ -60,7 +60,7 @@ export function Navbar() {
       <div className="flex items-center gap-3">
         {/* Quick Reference Shortcut */}
         <Link
-          href="/quick-reference"
+          href="/reference"
           className="p-2 rounded-lg border border-border/40 bg-card/50 text-foreground/80 hover:text-foreground hover:bg-accent/40 transition-colors shadow-sm"
           title="Quick Reference Guide"
         >

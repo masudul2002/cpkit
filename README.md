@@ -25,13 +25,13 @@ To ensure a clean and modular architecture, features are isolated and lazy-loade
 - **Greedy Studio (v1.1.0)**: Run sorted activity compatible task timelines for Activity Selection and Interval Scheduling, calculate fractional item allocations in Fractional Knapsack, sequence jobs on deadlines slots, route train arrivals/departures in Minimum Platforms, merge overlapping segments in Merge Intervals, construct Huffman prefix trees, simulate local greedy coin failure cases, trace circular tank sweeps in Gas Station, merge priority queue files optimal patterns, and balance processor makespans in Load Balancing. See the [Greedy Feature Docs](docs/features/greedy.md) for full descriptions.
 - **Search & Sorting Laboratory (v1.2.0)**: Run pointer sweeps in Linear Search, logarithmic interval splits in Binary Search, find lower and upper bounds, partition ternary search ranges, evaluate Book Allocation feasibility in Binary Search on Answer, animate comparisons and swaps in Bubble, Selection, Insertion, Merge, Quick, and Heap Sort, compute frequencies in Counting Sort, sort digit places in Radix Sort, distribute range buckets in Bucket Sort, benchmark sorting speeds, and test custom comparators stability. See the [Search & Sorting Feature Docs](docs/features/search-sorting.md) for full descriptions.
 - **Geometry Laboratory (v1.3.0)**: Calculate point distances (Euclidean 2D/3D, Manhattan, Chebyshev), check point orientation turns (CW, CCW, Collinear), compute vector cross and dot products, solve line and segment intersections, animate Graham Scan convex hulls, compute Shoelace polygon areas and perimeters, check circles and triangles centroid/area/type detection, test Ray Casting point in polygon containments, and apply coordinate translation/rotation matrices. See the [Geometry Laboratory Feature Docs](docs/features/geometry.md) for full descriptions.
+- **Quick Reference Center (v1.4.0)**: Search STL references, complexities tables, bit manipulation operations, modular arithmetic equations, graph/tree/DP/greedy algorithm cheatsheets, copyable C++/Python/Java/Go/Rust CP templates, and compiler optimization flags. See the [Quick Reference Feature Docs](docs/features/reference.md) for full descriptions.
 - **Responsive Layout Shell**: Collapsible workspace sidebar and header search links.
 - **Interactive Command Palette**: Global quick-actions launcher (triggered via `Cmd/Ctrl + K`) supporting theme cycling and route links.
 - **Tailwind Design System**: Global styling tokens, layout containers, custom scroll views, responsive dividers, and modal boxes.
 
 ### 🟡 Planned Modules (Phase 2 & 3)
 - **Contest Scrapers**: Parse test inputs from Codeforces, AtCoder, etc.
-- **Quick Reference**: Formula cheatsheets and fast I/O macros.
 
 ### 🔵 Future Library Extensions (Phase 4)
 
