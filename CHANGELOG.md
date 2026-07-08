@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-07-08
+
+### Added
+- Completed **Search & Sorting Laboratory (SR)** module containing 17 tools:
+  - Reusable Array Bar Chart visualizer displaying comparisons, swaps, sorted zones, and current indices.
+  - Linear Search, Binary Search, Lower Bound, Upper Bound, and Ternary Search.
+  - Binary Search on Answer evaluating optimal feasibility limits (e.g. Book Allocation).
+  - Bubble, Selection, Insertion, Merge, Quick, and Heap Sort with step-by-step trace animations.
+  - Counting, Radix, and Bucket Sort showing non-comparison frequency and bucket partitions.
+  - Sorting Benchmark comparing execution times, comparison counts, and swap counts.
+  - Custom Comparator Playground verifying stable sorting and custom sorting functions.
+- Shared Search & Sorting layouts and conceptual panels: `SrLayout`, `SrHeader`, and `EducationalPanel`.
+
+---
+
 ## [1.1.0] - 2026-07-08
 
 ### Added
