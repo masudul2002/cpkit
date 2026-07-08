@@ -37,6 +37,7 @@ This document outlines the planned release cycles, milestones, and upcoming algo
 - [x] **Practice Workspace (v2.1.0)**: Resizable and collapsible practicing panel layouts filterable by problem collections, with custom dry-run code input console executions, typography size parameters, and persistent individual problem notes.
 - [x] **User Experience Modules (v2.2.0)**: Interactive global settings (themes, accent highlights, and configurations imports/exports), bookmarks favorites board, clearable recent activity logs list, and integrated help center FAQ guidelines.
 - [x] **Brand Identity & Logo System (v1.6.0)**: Created official CPKit vector SVG logos, monogram icons, color configurations, and design spacing guidelines guidelines.
+- [x] **Core Platform Experience (v1.6.0)**: Overhauled settings dashboards, bookmarks favorites panels, clearable history tracking list, help FAQ index sheets, release change logs, and bug reporting portals.
 - [ ] **Contest Scrapers**:
   - [ ] Problem scrapers/parsers (Codeforces, AtCoder, CodeChef) to auto-download test case inputs/outputs.
   - [ ] Workspace template auto-generators supporting custom user macros.

@@ -25,6 +25,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/favorites",
     "/recent",
     "/about",
+    "/help",
+    "/releases",
+    "/feedback",
   ];
 
   return routes.map((route) => ({

@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Monogram icon vectors (`icon.svg`) and shortcut favicons (`favicon.svg`).
   - Color palette configurations JSON (`brand-colors.json`).
   - Core Brand Identity usage guidelines document (`brand-guidelines.md`).
+- Completed **Core Platform Experience** overhaul:
+  - Settings portal (`/settings`), favorites (`/favorites`), and recent logs (`/recent`) components.
+  - Help FAQ desk (`/help`), version release list (`/releases`), and ticket feedback forms (`/feedback`).
 
 ---
 
