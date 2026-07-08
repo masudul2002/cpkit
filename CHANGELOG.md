@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-07-08
+
+### Added
+- Completed **User Experience Modules** phase:
+  - Settings page (`/settings`) supporting global configurations, themes selections, accents, compact modes, and config back-ups exports/imports.
+  - Favorites dashboard (`/favorites`) with bookmarks search and priority pinning toggles.
+  - Recent activity console (`/recent`) tracking workspace restore routes and database history deletion.
+  - Help Center FAQ references sheets inside the main About routes (`/about`).
+
+---
+
 ## [2.1.0] - 2026-07-08
 
 ### Added

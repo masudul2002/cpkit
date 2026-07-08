@@ -21,6 +21,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/reference",
     "/workspace",
     "/practice",
+    "/settings",
+    "/favorites",
+    "/recent",
+    "/about",
   ];
 
   return routes.map((route) => ({
