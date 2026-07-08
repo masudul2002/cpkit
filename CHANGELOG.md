@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-07-08
+
+### Added
+- Completed **Geometry Laboratory (GY)** module containing 12 tools:
+  - Interactive SVG coordinate grid visualizer with snapped grid drags and overlays.
+  - Euclidean 2D/3D, Manhattan, and Chebyshev Point Distance query.
+  - Three points Clockwise, CCW, and Collinear Orientation test.
+  - Vector Cross Product skew area metrics and vector projections Dot Product calculations.
+  - Line Segment Intersection meeting points coordinates and parallel detections.
+  - Convex Hull Graham Scan step-by-step polar angle sorting tracing.
+  - Shoelace polygon areas and perimeter sweeps.
+  - Circle points containment and Triangles centroid types categorization.
+  - Ray Casting point in polygon crossings check.
+  - Coordinate translation, rotation, scaling, and reflection transform matrices.
+- Shared geometry layouts, headers, and educational tabs panels.
+
+---
+
 ## [1.2.0] - 2026-07-08
 
 ### Added

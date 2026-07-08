@@ -44,7 +44,7 @@ export default function Dashboard() {
     { title: "Dynamic Programming", href: "/dynamic-programming", count: "12 tools" },
     { title: "Greedy Choice", href: "/greedy", count: "11 tools" },
     { title: "Search & Sorting", href: "/search", count: "17 tools" },
-    { title: "Geometry", href: "/geometry", count: "4 tools" },
+    { title: "Geometry", href: "/geometry", count: "12 tools" },
   ];
 
   const quickActions = [
