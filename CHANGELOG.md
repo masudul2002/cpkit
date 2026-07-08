@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-07-08
+
+### Added
+- Completed **Brand Identity & Logo System** phase:
+  - Vector SVG logos for light (`logo-light.svg`) and dark (`logo-dark.svg`) theme backgrounds.
+  - Monogram icon vectors (`icon.svg`) and shortcut favicons (`favicon.svg`).
+  - Color palette configurations JSON (`brand-colors.json`).
+  - Core Brand Identity usage guidelines document (`brand-guidelines.md`).
+
+---
+
 ## [2.2.0] - 2026-07-08
 
 ### Added
