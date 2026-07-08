@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
-import { Copy, RotateCcw, Activity } from "lucide-react";
+import { RotateCcw, Activity } from "lucide-react";
 
 export function ExpressionEvaluator() {
   const { toast } = useToast();
@@ -24,7 +24,7 @@ export function ExpressionEvaluator() {
 
   const checkBracketBalance = (expr: string): boolean => {
     const stack: string[] = [];
-    for (let char of expr) {
+    for (const char of expr) {
       if (char === "(") {
         stack.push(char);
       } else if (char === ")") {

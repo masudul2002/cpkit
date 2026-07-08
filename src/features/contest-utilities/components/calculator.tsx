@@ -12,6 +12,60 @@ export function Calculator() {
   const [result, setResult] = React.useState("0");
   const [error, setError] = React.useState<string | null>(null);
 
+  const handleInput = (char: string) => {
+    setError(null);
+    setExpression((prev) => prev + char);
+  };
+
+  const handleClear = () => {
+    setExpression("");
+    setResult("0");
+    setError(null);
+  };
+
+  const handleBackspace = () => {
+    setError(null);
+    setExpression((prev) => prev.slice(0, -1));
+  };
+
+  const handleEvaluate = React.useCallback(() => {
+    if (!expression.trim()) return;
+    try {
+      // Safe math evaluation
+      // Replace % with /100 where needed or treat as modulo.
+      // In competitive programming, '%' is usually modulo. Let's support JavaScript modulo (%) operator!
+      // We will perform a simple sanitization check to make it safe to evaluate.
+      const sanitized = expression.replace(/[^0-9\+\-\*\/\%\.\(\)\s]/g, "");
+      
+      // Prevent eval on division by zero
+      if (/\/0(?![0-9\.])/.test(sanitized)) {
+        throw new Error("Division by zero");
+      }
+
+      const evalResult = new Function(`return (${sanitized})`)();
+      
+      if (evalResult === null || evalResult === undefined || isNaN(evalResult)) {
+        throw new Error("Invalid expression");
+      }
+      
+      setResult(String(evalResult));
+      setError(null);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Invalid expression");
+      setResult("Error");
+    }
+  }, [expression]);
+
+  const handleCopy = () => {
+    if (result === "Error" || result === "0") return;
+    navigator.clipboard.writeText(result);
+    toast({
+      title: "Copied to Clipboard",
+      description: `Result ${result} copied successfully.`,
+      variant: "success",
+    });
+  };
+
   // Focus keybinds for arithmetic
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -37,61 +91,7 @@ export function Calculator() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [expression]);
-
-  const handleInput = (char: string) => {
-    setError(null);
-    setExpression((prev) => prev + char);
-  };
-
-  const handleClear = () => {
-    setExpression("");
-    setResult("0");
-    setError(null);
-  };
-
-  const handleBackspace = () => {
-    setError(null);
-    setExpression((prev) => prev.slice(0, -1));
-  };
-
-  const handleEvaluate = () => {
-    if (!expression.trim()) return;
-    try {
-      // Safe math evaluation
-      // Replace % with /100 where needed or treat as modulo.
-      // In competitive programming, '%' is usually modulo. Let's support JavaScript modulo (%) operator!
-      // We will perform a simple sanitization check to make it safe to evaluate.
-      const sanitized = expression.replace(/[^0-9\+\-\*\/\%\.\(\)\s]/g, "");
-      
-      // Prevent eval on division by zero
-      if (/\/0(?![0-9\.])/.test(sanitized)) {
-        throw new Error("Division by zero");
-      }
-
-      const evalResult = new Function(`return (${sanitized})`)();
-      
-      if (evalResult === null || evalResult === undefined || isNaN(evalResult)) {
-        throw new Error("Invalid expression");
-      }
-      
-      setResult(String(evalResult));
-      setError(null);
-    } catch (err: any) {
-      setError(err.message || "Invalid expression");
-      setResult("Error");
-    }
-  };
-
-  const handleCopy = () => {
-    if (result === "Error" || result === "0") return;
-    navigator.clipboard.writeText(result);
-    toast({
-      title: "Copied to Clipboard",
-      description: `Result ${result} copied successfully.`,
-      variant: "success",
-    });
-  };
+  }, [expression, handleEvaluate]);
 
   const buttons = [
     { label: "(", type: "op" },

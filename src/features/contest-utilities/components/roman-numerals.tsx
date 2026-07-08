@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
-import { Copy, RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 
 export function RomanNumerals() {
   const { toast } = useToast();

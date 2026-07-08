@@ -29,7 +29,7 @@ interface Tool {
   category: string;
   difficulty: "Easy" | "Medium" | "Hard";
   href: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   shortcut: string;
 }
 

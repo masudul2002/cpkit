@@ -40,27 +40,35 @@ const TYPE_SPECS: TypeSpec[] = [
 export function OverflowChecker() {
   const [inputValue, setInputValue] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
+  const [parsedValue, setParsedValue] = React.useState<bigint | null>(null);
 
   const handleClear = () => {
     setInputValue("");
     setError(null);
+    setParsedValue(null);
   };
 
-  const parsedValue = React.useMemo<bigint | null>(() => {
+  React.useEffect(() => {
     const trimmed = inputValue.trim();
-    if (!trimmed) return null;
+    if (!trimmed) {
+      setError(null);
+      setParsedValue(null);
+      return;
+    }
 
     if (!/^\-?[0-9]+$/.test(trimmed)) {
       setError("Please enter a valid signed integer digits sequence");
-      return null;
+      setParsedValue(null);
+      return;
     }
 
     try {
+      const val = BigInt(trimmed);
       setError(null);
-      return BigInt(trimmed);
+      setParsedValue(val);
     } catch {
       setError("Number exceeds safe parser constraints");
-      return null;
+      setParsedValue(null);
     }
   }, [inputValue]);
 

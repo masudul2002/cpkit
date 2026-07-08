@@ -65,7 +65,7 @@ export function BinaryCalculator() {
       // We will parse with BigInt to support large bits.
       // However, bitwise shifts in JS are limited or require custom logic for BigInt.
       // BigInt bitwise operations: A & B, A | B, A ^ B, ~A, A << B, A >> B are supported in ES2020!
-      let bigA = inputFormat === "dec" ? BigInt(valA.trim()) : BigInt("0b" + valA.trim());
+      const bigA = inputFormat === "dec" ? BigInt(valA.trim()) : BigInt("0b" + valA.trim());
       let bigB = BigInt(0);
 
       if (operator !== "NOT") {
