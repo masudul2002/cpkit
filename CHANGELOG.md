@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-07-08
+
+### Added
+- Completed **String Laboratory (ST)** module containing 15 tools:
+  - Character Frequency Counter parsing unique/duplicate characters and sorting frequencies.
+  - Palindrome Checker validating mirror strings with case, spaces, and punctuation filters, and mismatch positions.
+  - Reverse String supporting characters, words, and lines reversal inside a multiline editor.
+  - String Rotation generating cyclic left/right shifts and validating rotations.
+  - Anagram Checker comparing character frequency distributions side-by-side.
+  - Substring Search highlighting naive pattern index occurrences.
+  - Prefix Function (KMP) computing the proper prefix-suffix matching table (pi array) with step traces.
+  - Z Function computing Z-array values using active search window intervals.
+  - Rolling Hash calculating polynomial rolling checksums and warning on hash collisions.
+  - Edit Distance (Levenshtein) drawing interactive dynamic programming grids.
+  - Longest Common Prefix finding common starts for multiple strings.
+  - Longest Common Subsequence (LCS) rendering DP tables and backtracking paths.
+  - Longest Palindromic Substring returning start offset index and length.
+  - Suffix Array lexicographically sorting suffix indices.
+  - Aho-Corasick Trie multi-pattern state machine roadmap placeholder.
+- Shared string-laboratory components: `StLayout`, `StHeader`, and `EducationalPanel` with conceptual tabs.
+
+---
+
 ## [0.5.0] - 2026-07-08
 
 ### Added
