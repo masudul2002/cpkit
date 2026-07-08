@@ -6,9 +6,9 @@ This document outlines the official guidelines for the visual brand identity of 
 
 ## 🎨 Color Specifications (HEX & HSL)
 
-- **Primary Blue**: `#2563EB` | `hsl(221.2 83.2% 53.3%)`
-- **Secondary Cyan**: `#06B6D4` | `hsl(188.7 86.1% 42.4%)`
-- **Accent Purple**: `#8B5CF6` | `hsl(258.5 90.3% 66%)`
+- **Primary Hexagon Blue**: `#2563EB` | `hsl(221.2 83.2% 53.3%)`
+- **Brackets White**: `#FFFFFF` | `hsl(0 0% 100%)`
+- **Dark Text**: `#0F172A` | `hsl(222.2 47.4% 11.2%)`
 
 ---
 
