@@ -46,7 +46,11 @@ import {
   Divide,
   GitCommit,
   RotateCcw,
-  Columns
+  Columns,
+  X,
+  RotateCw,
+  Droplet,
+  Navigation
 } from "lucide-react";
 
 export interface NavItem {
@@ -156,7 +160,28 @@ export const sidebarItems: NavItem[] = [
       { title: "Aho-Corasick Trie", href: "/string-laboratory/aho-corasick", icon: Network },
     ],
   },
-  { title: "Matrix", href: "/matrix", icon: Table2 },
+  {
+    title: "Matrix",
+    href: "/matrix",
+    icon: Table2,
+    children: [
+      { title: "Matrix Generator", href: "/matrix/matrix-generator", icon: Sliders },
+      { title: "Matrix Transpose", href: "/matrix/transpose", icon: RefreshCw },
+      { title: "Matrix Rotation", href: "/matrix/rotation", icon: RotateCw },
+      { title: "Matrix Multiplication", href: "/matrix/multiplication", icon: X },
+      { title: "Identity Matrix", href: "/matrix/identity", icon: Grid3X3 },
+      { title: "Prefix Sum Matrix", href: "/matrix/prefix-sum", icon: Layers },
+      { title: "Matrix Exponentiation", href: "/matrix/matrix-power", icon: TrendingUp },
+      { title: "Matrix Determinant", href: "/matrix/determinant", icon: Calculator },
+      { title: "Matrix Rank", href: "/matrix/rank", icon: BarChart2 },
+      { title: "Spiral Traversal", href: "/matrix/spiral", icon: RotateCcw },
+      { title: "Diagonal Traversal", href: "/matrix/diagonal", icon: Shuffle },
+      { title: "Grid BFS", href: "/matrix/grid-bfs", icon: Network },
+      { title: "Grid DFS", href: "/matrix/grid-dfs", icon: GitBranch },
+      { title: "Flood Fill", href: "/matrix/flood-fill", icon: Droplet },
+      { title: "Pathfinding Grid", href: "/matrix/pathfinding", icon: Navigation },
+    ],
+  },
   { title: "Graph", href: "/graph", icon: Share2 },
   { title: "Tree", href: "/tree", icon: GitBranch },
   { title: "Dynamic Programming", href: "/dp", icon: Layers },

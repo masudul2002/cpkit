@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-07-08
+
+### Added
+- Completed **Matrix Laboratory (MX)** module containing 15 tools:
+  - Matrix Generator supporting random, binary, identity, sparse, and weighted grid formations.
+  - Matrix Transpose swapping square or rectangular matrix rows and columns with live outputs.
+  - Matrix Rotation pivoting values by 90°, 180°, or 270° clockwise or counter-clockwise.
+  - Matrix Multiplication offering size validation audits and tracing element multiplication arithmetic formulas.
+  - Identity Matrix creating custom diagonal arrays and identity templates.
+  - Prefix Sum Matrix calculating 2D prefix sums supporting interactive query bounds queries.
+  - Matrix Exponentiation calculating modular matrices fast power binary loops.
+  - Determinant solving 2x2 and 3x3 expansion scalars.
+  - Matrix Rank determining linearly independent rows via Gaussian reduction tracing logs.
+  - Spiral Traversal tracing clockwise/counter-clockwise circular index sweeps.
+  - Diagonal Traversal listing primary, anti-diagonal, and 2D zigzag paths.
+  - Grid BFS illustrating unweighted grid searches using animated FIFO queues and wall builders.
+  - Grid DFS tracing recursive reachability paths.
+  - Flood Fill paint bucket tool labeling contiguous components.
+  - Pathfinding Grid integrating BFS animations and Dijkstra/A* visualizer placeholders.
+- Shared matrix components: `MxLayout`, `MxHeader`, `EducationalPanel`, `MatrixInput`, and `MatrixGrid`.
+
+---
+
 ## [0.6.0] - 2026-07-08
 
 ### Added

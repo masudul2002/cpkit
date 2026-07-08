@@ -18,6 +18,7 @@ To ensure a clean and modular architecture, features are isolated and lazy-loade
 - **Test Generator (v0.4.0)**: Generate random integers, arrays, strings, matrix grids, permutations, graphs, tree topologies, queries, intervals, coordinates, preconfigured edge cases, custom constraint sets, and batch collections. See the [Test Generator Feature Docs](docs/features/test-generator.md) for full descriptions.
 - **Number Theory & Bits (v0.5.0)**: Verify primality, run prime sieves (Eratosthenes, Segmented range), decompose prime factorizations, compute divisor structures, solve GCD/LCM, Extended Euclid, modular exponentiation/inverses, Euler phi, Möbius values, CRT systems, Gray codes, prefix/range XORs, and bitwise logic operations. See the [Number Theory Feature Docs](docs/features/number-theory.md) for full descriptions.
 - **String Laboratory (v0.6.0)**: Analyze character frequencies, test palindromes, reverse segments/words/lines, generate left/right cyclic rotations, check anagram distributions, perform naive substring match highlights, calculate prefix functions (pi tables) and Z-arrays with interactive trace logs, compute polynomial rolling hashes, solve Edit Distance and Longest Common Subsequence (LCS) with dynamic programming tables, search longest palindromic substrings, sort suffix arrays, and query Aho-Corasick multi-pattern trie placeholders. See the [String Laboratory Feature Docs](docs/features/string-laboratory.md) for full descriptions.
+- **Matrix Laboratory (v0.7.0)**: Construct random, binary, identity, sparse, or weighted matrices, compute square/rectangular transpositions, rotate elements cyclically, multiply matrices with shape validations and cell calculations steps, generate diagonal matrices, compute 2D prefix sums for O(1) range queries, evaluate fast matrix binary exponentiations, calculate scalar determinants, determine rank via Gaussian elimination, traverse grids spirally/diagonally/zigzag, run interactive BFS/DFS grid traversals, flood fill paint regions, and execute pathfinder animations. See the [Matrix Laboratory Feature Docs](docs/features/matrix.md) for full descriptions.
 - **Responsive Layout Shell**: Collapsible workspace sidebar and header search links.
 - **Interactive Command Palette**: Global quick-actions launcher (triggered via `Cmd/Ctrl + K`) supporting theme cycling and route links.
 - **Tailwind Design System**: Global styling tokens, layout containers, custom scroll views, responsive dividers, and modal boxes.
@@ -27,7 +28,6 @@ To ensure a clean and modular architecture, features are isolated and lazy-loade
 - **Quick Reference**: Formula cheatsheets and fast I/O macros.
 
 ### 🔵 Future Library Extensions (Phase 4)
-- **Matrix**: Exponentiation and Gaussian elimination.
 - **Graph & Tree**: LCA, Segment Trees, shortest paths, and max flows.
 - **Dynamic Programming**: Classic patterns and bitmask optimizations.
 - **Greedy**: Optimization structures and scheduling.
