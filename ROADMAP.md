@@ -16,8 +16,8 @@ This document outlines the planned release cycles, milestones, and upcoming algo
 
 ---
 
-## 🛠️ Phase 2: Contest Utilities, Debugging, Generators, Math, Strings, Matrices & Graphs (Current Release - v0.8.0)
-*Goal: Integrate active calculators, references, debugging helpers, data generators, mathematics utilities, string laboratories, matrix workspaces, and graph canvases.*
+## 🛠️ Phase 2: Contest Utilities, Debugging, Generators, Math, Strings, Matrices, Graphs & Trees (Current Release - v0.9.0)
+*Goal: Integrate active calculators, references, debugging helpers, data generators, mathematics utilities, string laboratories, matrix workspaces, graph canvases, and tree layout engines.*
 
 - [x] **Contest Utilities (v0.2.0)**: Complete 8 essential sub-tools (arithmetic, base conversions, logical operations, ASCII sheets, Roman translation, expression parsing, BigInt math, overflow bounds check).
 - [x] **Debug Tools (v0.3.0)**: Complete 11 essential sub-tools (Output Comparer, Line Diff, Character Diff, Frequency Comparator, Sort Checker, Duplicate Finder, Array Shuffler, Whitespace Checker, Input Validator, Stress Test Comparator, Memory Estimator).
@@ -26,6 +26,7 @@ This document outlines the planned release cycles, milestones, and upcoming algo
 - [x] **String Laboratory (v0.6.0)**: Complete 15 string matching and DP utilities (Character Frequency, Palindrome Checker, Reverse, Rotation, Anagram, Substring Search, Prefix Function, Z Function, Rolling Hash, Edit Distance, LCP, LCS, Longest Palindrome, Suffix Array, Aho-Corasick placeholder).
 - [x] **Matrix Laboratory (v0.7.0)**: Complete 15 matrix, grid, and pathfinding utilities (Matrix Generator, Transpose, Rotation, Multiplication, Identity/Diagonal, 2D Prefix Sum, Exponentiation, Determinants, Rank, Spiral/Diagonal sweeps, Grid BFS/DFS animations, Flood Fill paint component, and Pathfinding animations).
 - [x] **Graph Laboratory (v0.8.0)**: Complete 14 graph, traversal, shortest path, spanning tree, and connectivity utilities (BFS/DFS, Dijkstra, Bellman-Ford, Floyd-Warshall matrix, Topological Sort, Prim/Kruskal MST, DSU forest, Bipartite coloring, Critical Bridges, Articulation Points, Kosaraju SCC, and topological graph properties).
+- [x] **Tree Laboratory (v0.9.0)**: Complete 12 tree, traversal, segment tree, and LCA utilities (DFS traversals, BST/AVL trees, Binary Heap, Segment Tree, Lazy Segment Tree, Fenwick, Trie, Lowest Common Ancestor, Euler Tour, Tree Diameter, and Centroid Decomposition).
 - [ ] **Contest Scrapers**:
   - [ ] Problem scrapers/parsers (Codeforces, AtCoder, CodeChef) to auto-download test case inputs/outputs.
   - [ ] Workspace template auto-generators supporting custom user macros.
@@ -46,7 +47,6 @@ This document outlines the planned release cycles, milestones, and upcoming algo
 ## 📚 Phase 4: Algorithmic Libraries (Future Extensions)
 *Goal: Package highly-optimized, copy-pasteable reference code for classic CP topics.*
 
-- [ ] **Tree**: LCA, Segment Trees, Fenwick, Centroid Decomposition.
 - [ ] **Dynamic Programming**: Classic patterns, bitmask optimization, digit DP, and Convex Hull Trick.
 - [ ] **Greedy**: Interval scheduling, exchange argument references.
 - [ ] **Geometry**: Convex hull solvers, line intersection checks.

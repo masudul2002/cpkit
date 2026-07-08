@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-07-08
+
+### Added
+- Completed **Tree Laboratory (TR)** module containing 12 tools:
+  - Interactive Tree Layout Canvas with DFS hierarchical node distributions.
+  - Tree Traversals tracing preorder, inorder, postorder, and level-order lists.
+  - Binary Search Tree (BST) point insertions, deletions, and lookup steps.
+  - AVL Tree self-balancing rotations.
+  - Binary Heap point insertions, deletions, array representation mirrors, and heapify swapping traces.
+  - Segment Tree build, update, and range sum queries.
+  - Lazy Segment Tree range additions and deferred lazy tag propagations.
+  - Fenwick Tree prefix sum range queries and point updates.
+  - Trie prefix character lookups and search matches.
+  - Lowest Common Ancestor (LCA) binary lifting parent tables.
+  - Euler Tour DFS entry and exit times flattening tree ranges.
+  - Tree Diameter dual DFS sweeps.
+  - Centroid Decomposition recursive centroid tree structures.
+- Shared tree components: `TrLayout`, `TrHeader`, `EducationalPanel`, and `TreeCanvas`.
+
+---
+
 ## [0.8.0] - 2026-07-08
 
 ### Added
