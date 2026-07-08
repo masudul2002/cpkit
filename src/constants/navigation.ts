@@ -54,7 +54,10 @@ import {
   Activity,
   Bookmark,
   Scissors,
-  FolderOpen
+  FolderOpen,
+  ShoppingBag,
+  FileText,
+  Grid
 } from "lucide-react";
 
 export interface NavItem {
@@ -226,7 +229,29 @@ export const sidebarItems: NavItem[] = [
       { title: "Centroid Decomposition", href: "/tree/centroid", icon: Layers },
     ],
   },
-  { title: "Dynamic Programming", href: "/dp", icon: Layers },
+  {
+    title: "Dynamic Programming",
+    href: "/dynamic-programming",
+    icon: Layers,
+    children: [
+      { title: "0/1 Knapsack", href: "/dynamic-programming/knapsack", icon: ShoppingBag },
+      { title: "Coin Change", href: "/dynamic-programming/coin-change", icon: Coins },
+      { title: "LCS Subsequence", href: "/dynamic-programming/lcs", icon: FileText },
+      { title: "LIS Sequence", href: "/dynamic-programming/lis", icon: TrendingUp },
+      { title: "Edit Distance", href: "/dynamic-programming/edit-distance", icon: Scissors },
+      { title: "Matrix Chain", href: "/dynamic-programming/matrix-chain", icon: Calculator },
+      { title: "Subset Sum", href: "/dynamic-programming/subset-sum", icon: Grid },
+      { title: "Rod Cutting", href: "/dynamic-programming/rod-cutting", icon: Scissors },
+      { title: "Partition Problem", href: "/dynamic-programming/partition", icon: Grid },
+      { title: "Memoization", href: "/dynamic-programming/memoization", icon: Info },
+      { title: "Tabulation", href: "/dynamic-programming/tabulation", icon: Sliders },
+      { title: "Space Optimization", href: "/dynamic-programming/space-optimization", icon: Layers },
+      { title: "Digit DP", href: "/dynamic-programming/digit-dp", icon: Calculator },
+      { title: "Tree DP", href: "/dynamic-programming/tree-dp", icon: GitBranch },
+      { title: "Bitmask DP", href: "/dynamic-programming/bitmask-dp", icon: Layers },
+      { title: "Travelling Salesman", href: "/dynamic-programming/tsp", icon: Sliders },
+    ],
+  },
   { title: "Greedy", href: "/greedy", icon: Coins },
   { title: "Geometry", href: "/geometry", icon: Triangle },
   { title: "Search", href: "/search", icon: Search },

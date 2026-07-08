@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-07-08
+
+### Added
+- Completed **Dynamic Programming Studio (DP)** module containing 16 tools:
+  - Reusable Dynamic Programming Table Grid with row/col labels and backtrack path highlighting.
+  - 0/1 Knapsack Solver with interactive profit grids and selected item backtracking.
+  - Coin Change Solver evaluating minimum coins and total unique combinations.
+  - LCS Subsequence solver highlighting diagonal character matches.
+  - LIS Sequence solver tracing lengths, parents list, and subsets.
+  - Edit Distance solver rendering edit operations trace logs.
+  - Matrix Chain Multiplication minimizing multiplications via interval splits.
+  - Subset Sum Solver displaying boolean possibility grids.
+  - Rod Cutting Solver maximizing profit segments sales values.
+  - Partition Problem splitting disjoint equal subsets.
+  - Memoization Playground tracing top-down recursion cache hits.
+  - Tabulation Playground tracing bottom-up loop iterations.
+  - Space Optimization comparing O(N * S) 2D tables vs O(S) 1D rows.
+  - Coming Soon Advanced DP templates: Digit DP, Tree DP, Bitmask DP, and Travelling Salesman.
+- Shared DP Studio layout components: `DpLayout`, `DpHeader`, and `EducationalPanel`.
+
+---
+
 ## [0.9.0] - 2026-07-08
 
 ### Added

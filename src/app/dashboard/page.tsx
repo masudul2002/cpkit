@@ -41,7 +41,7 @@ export default function Dashboard() {
     { title: "Matrix", href: "/matrix", count: "3 tools" },
     { title: "Graph", href: "/graph", count: "6 tools" },
     { title: "Tree", href: "/tree", count: "4 tools" },
-    { title: "DP Optimization", href: "/dp", count: "4 tools" },
+    { title: "Dynamic Programming", href: "/dynamic-programming", count: "12 tools" },
     { title: "Greedy Choice", href: "/greedy", count: "3 tools" },
     { title: "Geometry", href: "/geometry", count: "4 tools" },
   ];
