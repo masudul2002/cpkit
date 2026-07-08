@@ -17,19 +17,39 @@ import {
   Clock,
   Settings,
   Info,
-  Search
+  Search,
+  Calculator,
+  RefreshCw,
+  Binary,
+  FileCode2,
+  Cpu
 } from "lucide-react";
 
 export interface NavItem {
   title: string;
   href: string;
   icon: any;
+  children?: NavItem[];
 }
 
 export const sidebarItems: NavItem[] = [
   { title: "Home", href: "/", icon: Home },
   { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { title: "Contest Utilities", href: "/contest-utilities", icon: Trophy },
+  {
+    title: "Contest Utilities",
+    href: "/contest-utilities",
+    icon: Trophy,
+    children: [
+      { title: "Calculator", href: "/contest-utilities/calculator", icon: Calculator },
+      { title: "Base Converter", href: "/contest-utilities/base-converter", icon: RefreshCw },
+      { title: "Binary Calculator", href: "/contest-utilities/binary-calculator", icon: Binary },
+      { title: "ASCII Table", href: "/contest-utilities/ascii-table", icon: Hash },
+      { title: "Roman Converter", href: "/contest-utilities/roman-converter", icon: BookOpen },
+      { title: "Expression Evaluator", href: "/contest-utilities/expression-evaluator", icon: FileCode2 },
+      { title: "BigInt Calculator", href: "/contest-utilities/bigint-calculator", icon: Layers },
+      { title: "Overflow Checker", href: "/contest-utilities/overflow-checker", icon: Cpu },
+    ],
+  },
   { title: "Debug Tools", href: "/debug", icon: Bug },
   { title: "Test Generator", href: "/generator", icon: Sparkles },
   { title: "Strings", href: "/strings", icon: Hash },

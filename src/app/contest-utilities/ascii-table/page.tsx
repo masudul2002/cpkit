@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/ui/containers";
-import { AsciiTable } from "@/features/contest-utilities/components/ascii-table";
+import { AsciiTableTool } from "@/features/contest-utilities/tools/ascii-table/ascii-table-tool";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -15,7 +15,7 @@ export default function AsciiTablePage() {
           </Button>
         </Link>
       </div>
-      <AsciiTable />
+      <AsciiTableTool />
     </PageContainer>
   );
 }

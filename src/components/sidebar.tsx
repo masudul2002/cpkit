@@ -53,42 +53,73 @@ export function Sidebar() {
       {/* Navigation Items */}
       <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
         {sidebarItems.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive = pathname === item.href || (item.children && pathname.startsWith(item.href));
           const Icon = item.icon;
+          const hasChildren = item.children && item.children.length > 0;
+          const isExpanded = !sidebarCollapsed && isActive;
 
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 relative group cursor-pointer",
-                isActive
-                  ? "bg-primary/10 text-primary border-l-2 border-primary"
-                  : "text-foreground/70 hover:text-foreground hover:bg-accent/40"
-              )}
-            >
-              <Icon
+            <div key={item.href} className="space-y-0.5">
+              <Link
+                href={item.href}
                 className={cn(
-                  "h-4 w-4 transition-transform duration-200 group-hover:scale-110",
-                  isActive ? "text-primary" : "text-muted-foreground"
-                )}
-              />
-              <span
-                className={cn(
-                  "transition-all duration-300",
-                  sidebarCollapsed ? "opacity-0 w-0 overflow-hidden" : "opacity-100 w-auto"
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 relative group cursor-pointer",
+                  pathname === item.href
+                    ? "bg-primary/10 text-primary border-l-2 border-primary"
+                    : isActive
+                    ? "bg-primary/5 text-primary/80"
+                    : "text-foreground/70 hover:text-foreground hover:bg-accent/40"
                 )}
               >
-                {item.title}
-              </span>
-
-              {/* Tooltip on collapsed state */}
-              {sidebarCollapsed && (
-                <div className="absolute left-full ml-3 px-2 py-1 rounded bg-popover text-popover-foreground border border-border text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-md">
+                <Icon
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-200 group-hover:scale-110",
+                    isActive ? "text-primary" : "text-muted-foreground"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "transition-all duration-300",
+                    sidebarCollapsed ? "opacity-0 w-0 overflow-hidden" : "opacity-100 w-auto"
+                  )}
+                >
                   {item.title}
+                </span>
+
+                {/* Tooltip on collapsed state */}
+                {sidebarCollapsed && (
+                  <div className="absolute left-full ml-3 px-2 py-1 rounded bg-popover text-popover-foreground border border-border text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-md">
+                    {item.title}
+                  </div>
+                )}
+              </Link>
+
+              {/* Sub-items list */}
+              {hasChildren && isExpanded && (
+                <div className="pl-4 space-y-0.5 border-l border-border/10 ml-5 mt-1 mb-2">
+                  {item.children!.map((sub) => {
+                    const isSubActive = pathname === sub.href;
+                    const SubIcon = sub.icon;
+
+                    return (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        className={cn(
+                          "flex items-center gap-2.5 px-3 py-1.5 rounded-md text-[11px] font-medium transition-all duration-150 cursor-pointer",
+                          isSubActive
+                            ? "bg-primary/5 text-primary"
+                            : "text-muted-foreground hover:text-foreground hover:bg-accent/25"
+                        )}
+                      >
+                        <SubIcon className="h-3 w-3 shrink-0" />
+                        <span>{sub.title}</span>
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
-            </Link>
+            </div>
           );
         })}
       </div>

@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/ui/containers";
-import { OverflowChecker } from "@/features/contest-utilities/components/overflow-checker";
+import { OverflowCheckerTool } from "@/features/contest-utilities/tools/overflow-checker/overflow-checker-tool";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -15,7 +15,7 @@ export default function OverflowCheckerPage() {
           </Button>
         </Link>
       </div>
-      <OverflowChecker />
+      <OverflowCheckerTool />
     </PageContainer>
   );
 }

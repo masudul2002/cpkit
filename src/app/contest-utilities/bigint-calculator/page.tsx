@@ -1,10 +1,10 @@
 import { PageContainer } from "@/components/ui/containers";
-import { RomanNumerals } from "@/features/contest-utilities/components/roman-numerals";
+import { BigintCalculatorTool } from "@/features/contest-utilities/tools/bigint-calculator/bigint-calculator-tool";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-export default function RomanNumeralsPage() {
+export default function BigintCalculatorPage() {
   return (
     <PageContainer size="narrow">
       <div className="mb-6">
@@ -15,7 +15,7 @@ export default function RomanNumeralsPage() {
           </Button>
         </Link>
       </div>
-      <RomanNumerals />
+      <BigintCalculatorTool />
     </PageContainer>
   );
 }

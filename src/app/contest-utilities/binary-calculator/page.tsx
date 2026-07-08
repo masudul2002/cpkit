@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/ui/containers";
-import { BinaryCalculator } from "@/features/contest-utilities/components/binary-calculator";
+import { BinaryCalculatorTool } from "@/features/contest-utilities/tools/binary-calculator/binary-calculator-tool";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -15,7 +15,7 @@ export default function BinaryCalculatorPage() {
           </Button>
         </Link>
       </div>
-      <BinaryCalculator />
+      <BinaryCalculatorTool />
     </PageContainer>
   );
 }

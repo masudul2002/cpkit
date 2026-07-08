@@ -66,12 +66,23 @@ export function CommandPalette() {
   ];
 
   const allItems = [
-    ...sidebarItems.map((item) => ({
-      title: `Go to ${item.title}`,
-      action: () => router.push(item.href),
-      icon: item.icon,
-      type: "navigation",
-    })),
+    ...sidebarItems.flatMap((item) => {
+      const items = [{
+        title: `Go to ${item.title}`,
+        action: () => router.push(item.href),
+        icon: item.icon,
+        type: "navigation",
+      }];
+      if (item.children) {
+        items.push(...item.children.map((sub) => ({
+          title: `Go to ${item.title} > ${sub.title}`,
+          action: () => router.push(sub.href),
+          icon: sub.icon,
+          type: "navigation",
+        })));
+      }
+      return items;
+    }),
     {
       title: "Go to Design System Showcase",
       action: () => router.push("/design-system"),

@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/ui/containers";
-import { Calculator } from "@/features/contest-utilities/components/calculator";
+import { CalculatorTool } from "@/features/contest-utilities/tools/calculator/calculator-tool";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -15,7 +15,7 @@ export default function CalculatorPage() {
           </Button>
         </Link>
       </div>
-      <Calculator />
+      <CalculatorTool />
     </PageContainer>
   );
 }

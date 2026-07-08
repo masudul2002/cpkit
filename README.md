@@ -13,7 +13,7 @@ The project features a modern, minimal, and developer-friendly UI inspired by Li
 To ensure a clean and modular architecture, features are isolated and lazy-loaded. Below is the active development status of planned modules:
 
 ### 🟢 Available Foundation
-- **Contest Utilities (v0.2.0)**: Standard calculators, base conversion utilities, logical bit calculators, Roman-dec conversions, expression parsers, and searchable ASCII tables.
+- **Contest Utilities (v0.2.0)**: Standard calculators, base conversion utilities, logical bit calculators, Roman-dec conversions, expression parsers, and searchable ASCII tables. See the [Contest Utilities Feature Docs](docs/features/contest-utilities.md) for full descriptions.
 - **Responsive Layout Shell**: Collapsible workspace sidebar and header search links.
 - **Interactive Command Palette**: Global quick-actions launcher (triggered via `Cmd/Ctrl + K`) supporting theme cycling and route links.
 - **Tailwind Design System**: Global styling tokens, layout containers, custom scroll views, responsive dividers, and modal boxes.

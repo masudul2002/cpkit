@@ -1,10 +1,10 @@
 import { PageContainer } from "@/components/ui/containers";
-import { BigInteger } from "@/features/contest-utilities/components/big-integer";
+import { RomanConverterTool } from "@/features/contest-utilities/tools/roman-converter/roman-converter-tool";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-export default function BigIntegerPage() {
+export default function RomanConverterPage() {
   return (
     <PageContainer size="narrow">
       <div className="mb-6">
@@ -15,7 +15,7 @@ export default function BigIntegerPage() {
           </Button>
         </Link>
       </div>
-      <BigInteger />
+      <RomanConverterTool />
     </PageContainer>
   );
 }

@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/ui/containers";
-import { BaseConverter } from "@/features/contest-utilities/components/base-converter";
+import { BaseConverterTool } from "@/features/contest-utilities/tools/base-converter/base-converter-tool";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -15,7 +15,7 @@ export default function BaseConverterPage() {
           </Button>
         </Link>
       </div>
-      <BaseConverter />
+      <BaseConverterTool />
     </PageContainer>
   );
 }

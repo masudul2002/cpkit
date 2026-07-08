@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/ui/containers";
-import { ExpressionEvaluator } from "@/features/contest-utilities/components/expression-evaluator";
+import { ExpressionEvaluatorTool } from "@/features/contest-utilities/tools/expression-evaluator/expression-evaluator-tool";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -15,7 +15,7 @@ export default function ExpressionEvaluatorPage() {
           </Button>
         </Link>
       </div>
-      <ExpressionEvaluator />
+      <ExpressionEvaluatorTool />
     </PageContainer>
   );
 }
