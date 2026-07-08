@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-07-08
+
+### Added
+- Completed **Test Generator (GEN)** module containing 13 data generators:
+  - Random Integer with min/max, negative value filters, hash-set uniqueness, and sorting.
+  - Random Array with N length, min/max values, duplicates, sorted, shuffles, and layout spacing.
+  - Random String with fixed/random length ranges, character checkboxes, and custom charsets.
+  - Random Matrix with binary, sparse (with density probability), and identity matrix styles.
+  - Random Permutation with N size and 0-indexed vs 1-indexed.
+  - Random Graph edge list generator supporting directed/undirected, weighted, connected, and DAGs.
+  - Random Tree binary/general structure configurations, random roots, and edge weights.
+  - Random Queries point updates, range queries, and numeric key formats.
+  - Random Interval standard, nested, and disjoint [L, R] interval spans.
+  - Coordinate Generator 2D and 3D floating point coordinates with decimal precision scales.
+  - Edge Case Generator preconfigured corner values (min, max, overflows, duplicates, reversed).
+  - Constraint Builder compound input configurations (N, M, cell density, matrices, query sets).
+  - Batch Generator case collector directories (up to 1000 files) with ZIP download placeholders.
+- Re-routed sidebar links from `/generator` to `/test-generator`.
+- Shared generator wrapper components: `GeneratorLayout`, `GeneratorHeader`, and `PreviewPanel`.
+
+---
+
 ## [0.3.0] - 2026-07-08
 
 ### Added

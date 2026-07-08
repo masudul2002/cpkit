@@ -31,7 +31,17 @@ import {
   Shuffle,
   AlignLeft,
   FileCheck,
-  Play
+  Play,
+  ListCollapse,
+  Type,
+  Grid3X3,
+  Network,
+  HelpCircle,
+  TrendingUp,
+  Compass,
+  Zap,
+  Sliders,
+  FolderSync
 } from "lucide-react";
 
 export interface NavItem {
@@ -77,7 +87,26 @@ export const sidebarItems: NavItem[] = [
       { title: "Memory Estimator", href: "/debug-tools/memory-estimator", icon: Cpu },
     ],
   },
-  { title: "Test Generator", href: "/generator", icon: Sparkles },
+  {
+    title: "Test Generator",
+    href: "/test-generator",
+    icon: Sparkles,
+    children: [
+      { title: "Random Integer", href: "/test-generator/random-integer", icon: Hash },
+      { title: "Random Array", href: "/test-generator/random-array", icon: ListCollapse },
+      { title: "Random String", href: "/test-generator/random-string", icon: Type },
+      { title: "Random Matrix", href: "/test-generator/random-matrix", icon: Grid3X3 },
+      { title: "Random Permutation", href: "/test-generator/random-permutation", icon: Shuffle },
+      { title: "Random Graph", href: "/test-generator/random-graph", icon: Network },
+      { title: "Random Tree", href: "/test-generator/random-tree", icon: GitBranch },
+      { title: "Random Queries", href: "/test-generator/random-query", icon: HelpCircle },
+      { title: "Random Interval", href: "/test-generator/random-interval", icon: TrendingUp },
+      { title: "Coordinate Generator", href: "/test-generator/coordinate-generator", icon: Compass },
+      { title: "Edge Case Generator", href: "/test-generator/edge-case-generator", icon: Zap },
+      { title: "Constraint Builder", href: "/test-generator/constraint-builder", icon: Sliders },
+      { title: "Batch Generator", href: "/test-generator/batch-generator", icon: FolderSync },
+    ],
+  },
   { title: "Strings", href: "/strings", icon: Hash },
   { title: "Number Theory", href: "/number-theory", icon: Percent },
   { title: "Matrix", href: "/matrix", icon: Table2 },

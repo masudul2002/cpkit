@@ -16,23 +16,21 @@ This document outlines the planned release cycles, milestones, and upcoming algo
 
 ---
 
-## 🛠️ Phase 2: Contest Utilities & Debugging (Current Release - v0.3.0)
-*Goal: Integrate active calculators, references, and debugging helpers.*
+## 🛠️ Phase 2: Contest Utilities, Debugging & Generators (Current Release - v0.4.0)
+*Goal: Integrate active calculators, references, debugging helpers, and data generators.*
 
 - [x] **Contest Utilities (v0.2.0)**: Complete 8 essential sub-tools (arithmetic, base conversions, logical operations, ASCII sheets, Roman translation, expression parsing, BigInt math, overflow bounds check).
 - [x] **Debug Tools (v0.3.0)**: Complete 11 essential sub-tools (Output Comparer, Line Diff, Character Diff, Frequency Comparator, Sort Checker, Duplicate Finder, Array Shuffler, Whitespace Checker, Input Validator, Stress Test Comparator, Memory Estimator).
+- [x] **Test Generator (v0.4.0)**: Complete 13 essential generators (Random Integer, Array, String, Matrix, Permutation, Graph, Tree, Queries, Intervals, Coordinates, Edge Cases, Custom Constraints, Batch Cases).
 - [ ] **Contest Scrapers**:
   - [ ] Problem scrapers/parsers (Codeforces, AtCoder, CodeChef) to auto-download test case inputs/outputs.
   - [ ] Workspace template auto-generators supporting custom user macros.
 
 ---
 
-## 📊 Phase 3: Test Generators & Visualizers (Upcoming)
-*Goal: Help programmers create edge cases and visualize complex algorithms.*
+## 📊 Phase 3: Algorithmic Visualizers (Upcoming)
+*Goal: Help programmers visualize complex algorithms step-by-step.*
 
-- [ ] **Test Generator**:
-  - [ ] Interactive UI to generate randomized datasets (Integers, Floats, Strings, Grids, Graphs, Trees).
-  - [ ] Precision constraints settings (prime lists, DAGs, weights, bounds).
 - [ ] **Algorithmic Visualizers**:
   - [ ] Graph search visualizer (BFS/DFS tree builders).
   - [ ] Shortest path visualizer (Dijkstra, Bellman-Ford step-by-step executions).
