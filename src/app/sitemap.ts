@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/geometry",
     "/reference",
     "/workspace",
+    "/practice",
   ];
 
   return routes.map((route) => ({

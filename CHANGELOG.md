@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-07-08
+
+### Added
+- Completed **Practice Workspace (PW)** module:
+  - Local storage state sync hook preserving custom coding settings.
+  - Category tags filtering (Arrays, Graphs, DP, Math, Greedy, Strings).
+  - Resizable left, center, right, and collapsible bottom panel layouts.
+  - Interactive custom input console runner to dry-run sample solutions against problems formats.
+  - Settings panel toggles supporting typography font size increments.
+
+---
+
 ## [2.0.0] - 2026-07-08
 
 ### Added

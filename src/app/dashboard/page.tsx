@@ -46,6 +46,7 @@ export default function Dashboard() {
     { title: "Search & Sorting", href: "/search", count: "17 tools" },
     { title: "Geometry", href: "/geometry", count: "12 tools" },
     { title: "Contest Workspace", href: "/workspace", count: "Flagship" },
+    { title: "Practice Workspace", href: "/practice", count: "Distraction-Free" },
   ];
 
   const quickActions = [
