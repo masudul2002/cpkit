@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-07-08
+
+### Added
+- Completed **Quality, Refactoring & Production Readiness** phase:
+  - Setup global error boundaries (`src/app/error.tsx`) and customized 404 screens (`src/app/not-found.tsx`).
+  - Added SEO robot filters (`src/app/robots.ts`) and dynamic XML sitemap generation (`src/app/sitemap.ts`).
+  - Added Progressive Web App (PWA) configuration parameters (`public/manifest.json`).
+  - Added GitHub Actions lint and build compilation workflows (`.github/workflows/ci.yml`).
+  - Expanded repository guidelines and policies (`ARCHITECTURE.md`, `DESIGN_SYSTEM.md`, `DEVELOPMENT.md`, `DEPLOYMENT.md`, `CONTRIBUTING.md`, `SECURITY.md`, `SUPPORT.md`, `DISCLAIMER.md`).
+
+---
+
 ## [1.4.0] - 2026-07-08
 
 ### Added

@@ -1,30 +1,14 @@
 ## Description
-
-Please include a summary of the changes and the related issue. Please also include relevant motivation and context.
-
-Fixes # (issue)
+Outline the goals of this pull request, reference issues, and describe changes.
 
 ## Type of Change
-
-Please delete options that are not relevant.
-
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] Refactoring (production quality polish)
 - [ ] Documentation update
 
-## Checklist
-
-- [ ] My code follows the code style guidelines of this project (Conventional Commits, TypeScript type safety).
-- [ ] I have performed a self-review of my own code.
-- [ ] I have commented my code, particularly in hard-to-understand areas.
-- [ ] I have made corresponding changes to the documentation.
-- [ ] My changes generate no new warnings when compiling (`npm run build` passes locally).
-
-## Testing
-
-Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce.
-
-## Screenshots (if applicable)
-
-Please attach screenshots or visual captures of the changes.
+## Checklist:
+- [ ] My code follows the code style parameters of this project.
+- [ ] I have ran `npm run lint` and resolved all warnings.
+- [ ] I have ran `npm run build` and resolved all static compilation errors.
+- [ ] I have updated the features documentation inside the `docs/features/` folder.
