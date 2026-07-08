@@ -45,6 +45,7 @@ export default function Dashboard() {
     { title: "Greedy Choice", href: "/greedy", count: "11 tools" },
     { title: "Search & Sorting", href: "/search", count: "17 tools" },
     { title: "Geometry", href: "/geometry", count: "12 tools" },
+    { title: "Contest Workspace", href: "/workspace", count: "Flagship" },
   ];
 
   const quickActions = [

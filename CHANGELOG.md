@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-07-08
+
+### Added
+- Completed **Contest Workspace (CW)** module:
+  - Persistent contest state manager hook syncing state to browser local storage.
+  - Problems list boards tracking solving progress, estimated vs actual duration counts, and customized labels.
+  - Interactive contest clocks with countdowns, fullscreen zoom layouts, and toggle states.
+  - Markdown scratchpads and per-problem notes logs.
+  - Embedded quick calculations tools panel widgets.
+  - Focus Mode toggles scaling layout spacing distraction-free.
+
+---
+
 ## [1.5.0] - 2026-07-08
 
 ### Added

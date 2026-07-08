@@ -70,6 +70,7 @@ export interface NavItem {
 export const sidebarItems: NavItem[] = [
   { title: "Home", href: "/", icon: Home },
   { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { title: "Contest Workspace", href: "/workspace", icon: Trophy },
   {
     title: "Contest Utilities",
     href: "/contest-utilities",

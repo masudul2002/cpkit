@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sorting",
     "/geometry",
     "/reference",
+    "/workspace",
   ];
 
   return routes.map((route) => ({
