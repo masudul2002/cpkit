@@ -6,6 +6,7 @@ import { useLayoutStore } from "@/lib/store";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { AvatarMenu } from "@/features/auth/components/avatar-menu";
 import { Search, Github, HelpCircle, Command } from "lucide-react";
+import { Logo } from "@/components/ui/logo";
 import { useEffect, useState } from "react";
 
 export function Navbar() {
@@ -28,9 +29,7 @@ export function Navbar() {
       <div className="flex items-center gap-4">
         {isLandingPage ? (
           <Link href="/" className="flex items-center gap-2 font-bold text-primary cursor-pointer">
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">
-              CPKit
-            </span>
+            <Logo />
           </Link>
         ) : (
           <h1 className="text-sm font-semibold tracking-tight text-foreground/80 md:block hidden animate-fade-in">

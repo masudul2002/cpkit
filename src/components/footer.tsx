@@ -41,7 +41,7 @@ export function Footer() {
 
         {/* Right: Version info */}
         <div>
-          <span>CPKit v0.1.0 • Built for Performance</span>
+          <span>CPKit v1.6.0 • Built for Performance</span>
         </div>
       </div>
     </footer>

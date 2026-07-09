@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
 import { Info, HelpCircle, Heart, Star, Sparkles, Send, Bug, MessageSquare, Terminal } from "lucide-react";
 
+import { LogoIcon } from "@/components/ui/logo-icon";
+
 export default function AboutPage() {
   const { toast } = useToast();
   const [feedbackType, setFeedbackType] = React.useState<"bug" | "feature" | "general">("feature");
@@ -37,7 +39,7 @@ export default function AboutPage() {
       {/* Vision Header Card */}
       <div className="flex items-center gap-4 bg-card/65 border border-border/40 p-5 rounded-2xl">
         <div className="p-3 bg-primary/10 text-primary border border-primary/20 rounded-xl">
-          <Info className="h-6 w-6" />
+          <LogoIcon className="h-6 w-6 text-primary" />
         </div>
         <div>
           <h2 className="text-lg font-black text-foreground">About CPKit Platform</h2>

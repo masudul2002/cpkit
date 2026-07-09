@@ -7,6 +7,8 @@ import { useLayoutStore } from "@/lib/store";
 import { sidebarItems } from "@/constants/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { Logo } from "@/components/ui/logo";
+
 export function Sidebar() {
   const pathname = usePathname();
   const { sidebarCollapsed, toggleSidebar } = useLayoutStore();
@@ -24,15 +26,15 @@ export function Sidebar() {
           href="/"
           className={cn(
             "flex items-center gap-2 font-semibold tracking-wider text-primary transition-all duration-300",
-            sidebarCollapsed ? "opacity-0 w-0 overflow-hidden" : "opacity-100 w-auto"
+            sidebarCollapsed ? "mx-auto" : "opacity-100 w-auto"
           )}
         >
-          <span className="text-xl font-bold bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">
-            CPKit
-          </span>
-          <span className="text-[10px] text-muted-foreground border border-muted-foreground/30 px-1 rounded uppercase tracking-widest">
-            v0.1
-          </span>
+          <Logo showWordmark={!sidebarCollapsed} />
+          {!sidebarCollapsed && (
+            <span className="text-[10px] text-muted-foreground border border-muted-foreground/30 px-1 rounded uppercase tracking-widest">
+              v1.6.0
+            </span>
+          )}
         </Link>
         <button
           onClick={toggleSidebar}

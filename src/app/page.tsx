@@ -90,7 +90,7 @@ export default function LandingPage() {
       <section className="container max-w-7xl mx-auto px-6 grid gap-12 lg:grid-cols-12 items-center">
         <div className="lg:col-span-7 space-y-6 text-left">
           <Badge variant="primary" className="px-3 py-1 text-xs">
-            Introducing CPKit v0.1
+            Introducing CPKit v1.6.0
           </Badge>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-none text-foreground">
             Everything a <span className="bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">Competitive Programmer</span> Needs.
