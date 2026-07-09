@@ -3,21 +3,29 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/toast";
 import {
+  MousePointer,
+  Hand,
+  CircleDot,
+  GitCommit,
   Trash2,
-  Plus,
-  Shuffle,
+  Undo2,
+  Redo2,
   RefreshCw,
   Search,
   Download,
-  LayoutGrid,
+  Upload,
   Maximize2,
   Layers,
+  LayoutGrid,
+  Info,
+  Play,
+  RotateCcw,
   Sparkles,
-  Settings,
-  HelpCircle
+  Lock,
+  Unlock,
+  Plus
 } from "lucide-react";
 
 export interface NodeItem {
@@ -25,6 +33,7 @@ export interface NodeItem {
   label: string;
   x: number;
   y: number;
+  locked?: boolean;
 }
 
 export interface EdgeItem {
@@ -45,6 +54,8 @@ interface GraphCanvasProps {
   pathNodes?: string[];
 }
 
+type ActiveTool = "select" | "hand" | "add-vertex" | "add-edge" | "delete";
+
 export function GraphCanvas({
   nodes,
   edges,
@@ -57,69 +68,152 @@ export function GraphCanvas({
   const { toast } = useToast();
   const svgRef = React.useRef<SVGSVGElement>(null);
   
-  // States
-  const [selectedNode, setSelectedNode] = React.useState<string | null>(null);
-  const [connectingNode, setConnectingNode] = React.useState<string | null>(null);
-  const [draggingNode, setDraggingNode] = React.useState<string | null>(null);
+  // Selection & Modes
+  const [activeTool, setActiveTool] = React.useState<ActiveTool>("select");
+  const [selectedNodeId, setSelectedNodeId] = React.useState<string | null>(null);
+  const [selectedEdgeId, setSelectedEdgeId] = React.useState<string | null>(null);
+  const [connectingNodeId, setConnectingNodeId] = React.useState<string | null>(null);
+  const [draggingNodeId, setDraggingNodeId] = React.useState<string | null>(null);
+  
+  // Weights / Inline editors
+  const [editingNodeId, setEditingNodeId] = React.useState<string | null>(null);
+  const [nodeRenameVal, setNodeRenameVal] = React.useState("");
   const [edgeWeightVal, setEdgeWeightVal] = React.useState("1");
   const [isDirected, setIsDirected] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [snapToGrid, setSnapToGrid] = React.useState(true);
 
-  // Canvas Pan & Zoom
+  // Canvas Viewport Pan/Zoom
   const [pan, setPan] = React.useState({ x: 0, y: 0 });
   const [zoom, setZoom] = React.useState(1);
   const [isPanning, setIsPanning] = React.useState(false);
   const [panStart, setPanStart] = React.useState({ x: 0, y: 0 });
 
-  // Deletions
-  const handleDeleteNode = React.useCallback(() => {
-    if (!selectedNode) return;
-    const nextNodes = nodes.filter((n) => n.id !== selectedNode);
-    const nextEdges = edges.filter((edge) => edge.from !== selectedNode && edge.to !== selectedNode);
-    onChange(nextNodes, nextEdges);
-    setSelectedNode(null);
-    setConnectingNode(null);
-  }, [selectedNode, nodes, edges, onChange]);
+  // History Stack (Undo/Redo)
+  const [history, setHistory] = React.useState<{ nodes: NodeItem[]; edges: EdgeItem[] }[]>([]);
+  const [historyIdx, setHistoryIdx] = React.useState(-1);
 
-  // Keyboard Shortcuts listener
+  // Push state to history helper
+  const pushState = React.useCallback((newNodes: NodeItem[], newEdges: EdgeItem[]) => {
+    const nextHist = history.slice(0, historyIdx + 1);
+    nextHist.push({ nodes: newNodes, edges: newEdges });
+    setHistory(nextHist);
+    setHistoryIdx(nextHist.length - 1);
+  }, [history, historyIdx]);
+
+  // Deletions
+  const handleDeleteNode = React.useCallback((nodeId: string) => {
+    const nextNodes = nodes.filter((n) => n.id !== nodeId);
+    const nextEdges = edges.filter((e) => e.from !== nodeId && e.to !== nodeId);
+    onChange(nextNodes, nextEdges);
+    pushState(nextNodes, nextEdges);
+    if (selectedNodeId === nodeId) setSelectedNodeId(null);
+  }, [nodes, edges, onChange]);
+
+  const handleDeleteEdge = React.useCallback((edgeId: string) => {
+    const nextEdges = edges.filter((e) => e.id !== edgeId);
+    onChange(nodes, nextEdges);
+    pushState(nodes, nextEdges);
+    if (selectedEdgeId === edgeId) setSelectedEdgeId(null);
+  }, [nodes, edges, onChange]);
+
+  const handleClearGraph = React.useCallback(() => {
+    onChange([], []);
+    pushState([], []);
+    setSelectedNodeId(null);
+    setSelectedEdgeId(null);
+    setConnectingNodeId(null);
+  }, [onChange, pushState]);
+
+  // Undo / Redo
+  const handleUndo = React.useCallback(() => {
+    if (historyIdx > 0) {
+      const prevIdx = historyIdx - 1;
+      setHistoryIdx(prevIdx);
+      onChange(history[prevIdx].nodes, history[prevIdx].edges);
+    }
+  }, [history, historyIdx, onChange]);
+
+  const handleRedo = React.useCallback(() => {
+    if (historyIdx < history.length - 1) {
+      const nextIdx = historyIdx + 1;
+      setHistoryIdx(nextIdx);
+      onChange(history[nextIdx].nodes, history[nextIdx].edges);
+    }
+  }, [history, historyIdx, onChange]);
+
+  // Keyboard events listener
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Delete" || e.key === "Backspace") {
-        if (selectedNode) {
-          handleDeleteNode();
-        }
+      if (e.target instanceof HTMLInputElement) return;
+
+      if (e.key === "v" || e.key === "V") setActiveTool("select");
+      else if (e.key === "h" || e.key === "H") setActiveTool("hand");
+      else if (e.key === "a" || e.key === "A") setActiveTool("add-vertex");
+      else if (e.key === "e" || e.key === "E") setActiveTool("add-edge");
+      else if (e.key === "Delete" || e.key === "Backspace") {
+        if (selectedNodeId) handleDeleteNode(selectedNodeId);
+        else if (selectedEdgeId) handleDeleteEdge(selectedEdgeId);
       } else if (e.key === "Escape") {
-        setConnectingNode(null);
-        setSelectedNode(null);
+        setSelectedNodeId(null);
+        setSelectedEdgeId(null);
+        setConnectingNodeId(null);
+      } else if (e.ctrlKey && (e.key === "z" || e.key === "Z")) {
+        e.preventDefault();
+        handleUndo();
+      } else if (e.ctrlKey && (e.key === "y" || e.key === "Y")) {
+        e.preventDefault();
+        handleRedo();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedNode, handleDeleteNode]);
+  }, [selectedNodeId, selectedEdgeId, nodes, edges, history, historyIdx, handleDeleteNode, handleDeleteEdge, handleUndo, handleRedo]);
 
-  // Mouse Drag / Panning logic
-  const handleMouseDown = (nodeId: string, e: React.MouseEvent) => {
+  // Mouse drag logic
+  const handleMouseDownNode = (nodeId: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    setDraggingNode(nodeId);
-    setSelectedNode(nodeId);
+    if (activeTool === "delete") {
+      handleDeleteNode(nodeId);
+      return;
+    }
+    if (activeTool === "add-edge") {
+      if (!connectingNodeId) {
+        setConnectingNodeId(nodeId);
+        toast({ title: "Connecting Edge", description: "Click target node to connect." });
+      } else {
+        createEdgeConnection(connectingNodeId, nodeId);
+      }
+      return;
+    }
+    setSelectedNodeId(nodeId);
+    setSelectedEdgeId(null);
+    const node = nodes.find((n) => n.id === nodeId);
+    if (node && !node.locked) {
+      setDraggingNodeId(nodeId);
+    }
   };
 
   const handleCanvasMouseDown = (e: React.MouseEvent) => {
-    if (e.button === 0) {
-      // Left click on empty space starts panning
+    if (activeTool === "hand" || e.button === 1 || e.button === 0) {
       setIsPanning(true);
       setPanStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
     }
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (draggingNode && svgRef.current) {
+    if (draggingNodeId && svgRef.current) {
       const rect = svgRef.current.getBoundingClientRect();
-      const rawX = (e.clientX - rect.left - pan.x) / zoom;
-      const rawY = (e.clientY - rect.top - pan.y) / zoom;
-      
+      let rawX = (e.clientX - rect.left - pan.x) / zoom;
+      let rawY = (e.clientY - rect.top - pan.y) / zoom;
+
+      if (snapToGrid) {
+        rawX = Math.round(rawX / 20) * 20;
+        rawY = Math.round(rawY / 20) * 20;
+      }
+
       const nextNodes = nodes.map((n) =>
-        n.id === draggingNode ? { ...n, x: Math.round(rawX), y: Math.round(rawY) } : n
+        n.id === draggingNodeId ? { ...n, x: Math.round(rawX), y: Math.round(rawY) } : n
       );
       onChange(nextNodes, edges);
     } else if (isPanning) {
@@ -131,80 +225,97 @@ export function GraphCanvas({
   };
 
   const handleMouseUp = () => {
-    setDraggingNode(null);
+    if (draggingNodeId) {
+      pushState(nodes, edges);
+      setDraggingNodeId(null);
+    }
     setIsPanning(false);
   };
 
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
-    const zoomIntensity = 0.05;
-    const nextZoom = e.deltaY < 0 ? zoom + zoomIntensity : zoom - zoomIntensity;
-    setZoom(Math.max(0.5, Math.min(2.5, nextZoom)));
+    const nextZoom = e.deltaY < 0 ? zoom + 0.05 : zoom - 0.05;
+    setZoom(Math.max(0.4, Math.min(3, nextZoom)));
   };
 
-  // Add node
+  // Add Vertex
   const handleCanvasClick = (e: React.MouseEvent) => {
-    if (e.detail !== 2 || !svgRef.current) return;
+    if (!svgRef.current) return;
+    if (activeTool !== "add-vertex" && e.detail !== 2) return;
+    
     const rect = svgRef.current.getBoundingClientRect();
-    const x = Math.round((e.clientX - rect.left - pan.x) / zoom);
-    const y = Math.round((e.clientY - rect.top - pan.y) / zoom);
+    let x = (e.clientX - rect.left - pan.x) / zoom;
+    let y = (e.clientY - rect.top - pan.y) / zoom;
+
+    if (snapToGrid) {
+      x = Math.round(x / 20) * 20;
+      y = Math.round(y / 20) * 20;
+    }
 
     const nextId = nodes.length > 0 ? (Math.max(...nodes.map((n) => parseInt(n.id, 10))) + 1).toString() : "0";
     const newNode: NodeItem = {
       id: nextId,
       label: `N${nextId}`,
-      x,
-      y,
+      x: Math.round(x),
+      y: Math.round(y),
     };
-    onChange([...nodes, newNode], edges);
-    setSelectedNode(nextId);
-  };
 
-  // Connect Nodes
-  const handleNodeClick = (nodeId: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (connectingNode) {
-      if (connectingNode === nodeId) {
-        setConnectingNode(null);
-        return;
-      }
-      const edgeId = `${connectingNode}-${nodeId}`;
-      const exists = edges.some((edge) => edge.id === edgeId || edge.id === `${nodeId}-${connectingNode}`);
-
-      if (!exists) {
-        const w = parseInt(edgeWeightVal, 10) || 1;
-        const newEdge: EdgeItem = {
-          id: edgeId,
-          from: connectingNode,
-          to: nodeId,
-          weight: w,
-          directed: isDirected,
-        };
-        onChange(nodes, [...edges, newEdge]);
-        toast({ title: "Connected", description: "New edge path established." });
-      }
-      setConnectingNode(null);
-    } else {
-      setSelectedNode(nodeId);
+    const nextNodes = [...nodes, newNode];
+    onChange(nextNodes, edges);
+    pushState(nextNodes, edges);
+    setSelectedNodeId(nextId);
+    
+    if (activeTool === "add-vertex") {
+      setActiveTool("select");
     }
   };
 
-  // Deletions & Layouts
+  // Create Connection
+  const createEdgeConnection = (fromId: string, toId: string) => {
+    if (fromId === toId) {
+      setConnectingNodeId(null);
+      return;
+    }
+    const edgeId = `${fromId}-${toId}`;
+    const exists = edges.some((e) => e.id === edgeId || (!isDirected && e.id === `${toId}-${fromId}`));
 
-  const handleClearGraph = () => {
-    onChange([], []);
-    setSelectedNode(null);
-    setConnectingNode(null);
+    if (!exists) {
+      const weight = parseInt(edgeWeightVal, 10) || 1;
+      const newEdge: EdgeItem = {
+        id: edgeId,
+        from: fromId,
+        to: toId,
+        weight,
+        directed: isDirected,
+      };
+      const nextEdges = [...edges, newEdge];
+      onChange(nodes, nextEdges);
+      pushState(nodes, nextEdges);
+      toast({ title: "Edge Connected", description: `Linked ${fromId} ➜ ${toId}.` });
+    }
+    setConnectingNodeId(null);
   };
 
-  // Pre-configured arrangements layout
-  const applyLayout = (type: "circular" | "grid" | "tree") => {
+  // Deletions / Connections completed
+
+  // Node Renaming
+  const handleRenameNodeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingNodeId || !nodeRenameVal.trim()) return;
+    const nextNodes = nodes.map((n) => (n.id === editingNodeId ? { ...n, label: nodeRenameVal } : n));
+    onChange(nextNodes, edges);
+    pushState(nextNodes, edges);
+    setEditingNodeId(null);
+  };
+
+  // Layout Algorithms
+  const applyLayout = (type: "circular" | "grid" | "tree" | "layered") => {
     if (nodes.length === 0) return;
-    const center = { x: 250, y: 180 };
+    const center = { x: 300, y: 200 };
     let nextNodes = [...nodes];
 
     if (type === "circular") {
-      const radius = 100;
+      const radius = 120;
       nextNodes = nodes.map((node, i) => {
         const angle = (i * 2 * Math.PI) / nodes.length;
         return {
@@ -215,118 +326,111 @@ export function GraphCanvas({
       });
     } else if (type === "grid") {
       const cols = Math.ceil(Math.sqrt(nodes.length));
-      const spacing = 80;
+      const spacing = 100;
       nextNodes = nodes.map((node, i) => {
         const r = Math.floor(i / cols);
         const c = i % cols;
         return {
           ...node,
           x: 100 + c * spacing,
-          y: 80 + r * spacing,
+          y: 100 + r * spacing,
         };
       });
     } else if (type === "tree") {
-      const spacingY = 70;
+      const spacingY = 80;
       nextNodes = nodes.map((node, i) => {
         const level = Math.floor(Math.log2(i + 1));
         const pos = i + 1 - Math.pow(2, level);
         const count = Math.pow(2, level);
-        const width = 400;
-        const spacingX = width / (count + 1);
+        const spacingX = 500 / (count + 1);
         return {
           ...node,
           x: Math.round((pos + 1) * spacingX),
-          y: 60 + level * spacingY,
+          y: 70 + level * spacingY,
         };
       });
     }
 
     onChange(nextNodes, edges);
-    toast({ title: "Layout Applied", description: `Graph arranged in ${type} layout.` });
+    pushState(nextNodes, edges);
+    toast({ title: "Layout Applied", description: `${type} arrangement completed.` });
   };
 
-  // Node search highlight
-  const handleSearch = () => {
-    const found = nodes.find((n) => n.label.toLowerCase() === searchQuery.toLowerCase() || n.id === searchQuery);
-    if (found) {
-      setSelectedNode(found.id);
-      setPan({ x: 250 - found.x * zoom, y: 180 - found.y * zoom });
-      toast({ title: "Found Node", description: `Centered view on ${found.label}.` });
-    } else {
-      toast({ title: "Not Found", description: "No node matches label search query.", variant: "warning" });
-    }
+  // Node Lock/Unlock toggle
+  const toggleNodeLock = (nodeId: string) => {
+    const nextNodes = nodes.map((n) => (n.id === nodeId ? { ...n, locked: !n.locked } : n));
+    onChange(nextNodes, edges);
+    pushState(nextNodes, edges);
   };
 
-  // Graph Properties & Statistics
-  const connectedComponents = React.useMemo(() => {
-    const visited = new Set<string>();
-    let count = 0;
-    const adj = new Map<string, string[]>();
-    nodes.forEach((n) => adj.set(n.id, []));
-    edges.forEach((e) => {
-      adj.get(e.from)?.push(e.to);
-      if (!e.directed) adj.get(e.to)?.push(e.from);
-    });
+  // Undo / Redo registers completed
 
-    const dfs = (u: string) => {
-      visited.add(u);
-      adj.get(u)?.forEach((v) => {
-        if (!visited.has(v)) dfs(v);
-      });
-    };
-
-    nodes.forEach((n) => {
-      if (!visited.has(n.id)) {
-        count++;
-        dfs(n.id);
-      }
-    });
-    return count;
-  }, [nodes, edges]);
-
-  // Export options
-  const exportJSON = () => {
-    const data = JSON.stringify({ nodes, edges }, null, 2);
-    const blob = new Blob([data], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "cpkit_graph_export.json";
-    a.click();
-  };
-
+  // Node Coordinates
   const getNodeCoords = (id: string) => {
     const node = nodes.find((n) => n.id === id);
     return node ? { x: node.x, y: node.y } : { x: 0, y: 0 };
   };
 
+  // Selected details
+  const selectedNodeDetails = nodes.find((n) => n.id === selectedNodeId);
+  const selectedEdgeDetails = edges.find((e) => e.id === selectedEdgeId);
+
+  // Auto layout triggers
+  React.useEffect(() => {
+    if (history.length === 0 && nodes.length > 0) {
+      setHistory([{ nodes, edges }]);
+      setHistoryIdx(0);
+    }
+  }, [nodes, edges]);
+
   return (
-    <div className="space-y-4 font-sans select-none text-left pb-16">
-      {/* Editor Controls Bar */}
-      <div className="flex flex-wrap items-center gap-3 bg-card/65 border border-border/40 p-4 rounded-2xl justify-between">
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="relative w-44">
-            <Search className="absolute left-2 top-2 h-3.5 w-3.5 text-muted-foreground" />
+    <div className="flex flex-col gap-4 font-sans text-left pb-16 select-none animate-fade-in">
+      
+      {/* 1. TOP TOOLBAR PANEL */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border border-border/40 bg-card/60 p-3 rounded-2xl">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <Search className="absolute left-2.5 top-2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search node label..."
+              placeholder="Search vertex label..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              className="pl-8 text-xs h-8 bg-background/50"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  const node = nodes.find((n) => n.label.toLowerCase() === searchQuery.toLowerCase());
+                  if (node) {
+                    setSelectedNodeId(node.id);
+                    setPan({ x: 300 - node.x * zoom, y: 200 - node.y * zoom });
+                  }
+                }
+              }}
+              className="pl-9 h-8 text-xs w-48 bg-background/40"
             />
           </div>
 
-          <div className="flex items-center gap-1.5 border-r border-border/10 pr-3">
-            <label className="text-xs font-semibold text-foreground/80">Weight:</label>
-            <input
-              type="number"
-              value={edgeWeightVal}
-              onChange={(e) => setEdgeWeightVal(e.target.value)}
-              className="w-12 h-8 text-xs border border-border/20 rounded-lg text-center bg-background text-foreground"
-            />
+          <div className="flex items-center gap-2 border-l border-border/10 pl-3">
+            <Button variant="outline" size="icon" className="h-8 w-8" onClick={handleUndo} disabled={historyIdx <= 0}>
+              <Undo2 className="h-4 w-4" />
+            </Button>
+            <Button variant="outline" size="icon" className="h-8 w-8" onClick={handleRedo} disabled={historyIdx >= history.length - 1}>
+              <Redo2 className="h-4 w-4" />
+            </Button>
           </div>
+        </div>
 
-          <div className="flex items-center gap-1.5 pr-3">
+        {/* Layout algorithms and actions */}
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={() => applyLayout("circular")} className="h-8 text-xs gap-1 cursor-pointer">
+            <RefreshCw className="h-3.5 w-3.5" /> Circular
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => applyLayout("tree")} className="h-8 text-xs gap-1 cursor-pointer">
+            <Layers className="h-3.5 w-3.5" /> Tree
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => applyLayout("grid")} className="h-8 text-xs gap-1 cursor-pointer">
+            <LayoutGrid className="h-3.5 w-3.5" /> Grid
+          </Button>
+          
+          <div className="flex items-center gap-1.5 border-l border-border/10 pl-3">
             <label className="text-xs font-semibold text-foreground/80">Directed:</label>
             <input
               type="checkbox"
@@ -340,31 +444,65 @@ export function GraphCanvas({
             />
           </div>
         </div>
-
-        {/* Layout arrange buttons */}
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={() => applyLayout("circular")} className="gap-1 cursor-pointer">
-            <RefreshCw className="h-3.5 w-3.5" />
-            Circular
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => applyLayout("tree")} className="gap-1 cursor-pointer">
-            <Layers className="h-3.5 w-3.5" />
-            Tree Layout
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => applyLayout("grid")} className="gap-1 cursor-pointer">
-            <LayoutGrid className="h-3.5 w-3.5" />
-            Grid
-          </Button>
-          <Button variant="outline" size="sm" onClick={exportJSON} className="gap-1 cursor-pointer text-xs">
-            <Download className="h-3.5 w-3.5" />
-            JSON
-          </Button>
-        </div>
       </div>
 
-      {/* Main Canvas & Statistics side */}
+      {/* 2. MAIN LAYOUT SHELL (Left toolbox, center canvas, right inspector) */}
       <div className="grid gap-4 md:grid-cols-12">
-        {/* Left: Interactive Canvas */}
+        
+        {/* Left floating toolbox */}
+        <div className="md:col-span-1 flex flex-row md:flex-col justify-start items-center gap-2 bg-card/65 border border-border/40 p-2.5 rounded-2xl h-fit">
+          <Button
+            variant={activeTool === "select" ? "primary" : "outline"}
+            size="icon"
+            onClick={() => setActiveTool("select")}
+            title="Pointer Select (V)"
+            className="h-9 w-9 rounded-xl"
+          >
+            <MousePointer className="h-4.5 w-4.5" />
+          </Button>
+          <Button
+            variant={activeTool === "hand" ? "primary" : "outline"}
+            size="icon"
+            onClick={() => setActiveTool("hand")}
+            title="Hand Pan Canvas (H)"
+            className="h-9 w-9 rounded-xl"
+          >
+            <Hand className="h-4.5 w-4.5" />
+          </Button>
+          <Button
+            variant={activeTool === "add-vertex" ? "primary" : "outline"}
+            size="icon"
+            onClick={() => setActiveTool("add-vertex")}
+            title="Add Vertex Node (A)"
+            className="h-9 w-9 rounded-xl"
+          >
+            <CircleDot className="h-4.5 w-4.5" />
+          </Button>
+          <Button
+            variant={activeTool === "add-edge" ? "primary" : "outline"}
+            size="icon"
+            onClick={() => setActiveTool("add-edge")}
+            title="Link Edge Path (E)"
+            className="h-9 w-9 rounded-xl"
+          >
+            <GitCommit className="h-4.5 w-4.5" />
+          </Button>
+          <Button
+            variant={activeTool === "delete" ? "primary" : "outline"}
+            size="icon"
+            onClick={() => {
+              if (selectedNodeId) handleDeleteNode(selectedNodeId);
+              else if (selectedEdgeId) handleDeleteEdge(selectedEdgeId);
+              else setActiveTool("delete");
+            }}
+            title="Delete Selected Element"
+            className="h-9 w-9 rounded-xl text-rose-500 hover:text-rose-600"
+          >
+            <Trash2 className="h-4.5 w-4.5" />
+          </Button>
+        </div>
+
+        {/* Center Canvas */}
         <div className="md:col-span-8 relative">
           <svg
             ref={svgRef}
@@ -374,12 +512,12 @@ export function GraphCanvas({
             onMouseLeave={handleMouseUp}
             onWheel={handleWheel}
             onClick={handleCanvasClick}
-            className="w-full h-[400px] border border-border/40 rounded-2xl bg-zinc-950/45 cursor-grab active:cursor-grabbing relative shadow-inner overflow-hidden"
+            className="w-full h-[420px] border border-border/40 rounded-2xl bg-zinc-950/45 relative shadow-inner overflow-hidden"
           >
-            {/* Grid Pattern Background */}
+            {/* SVG Grid pattern */}
             <defs>
-              <pattern id="gridPattern" width="30" height="30" patternUnits="userSpaceOnUse">
-                <circle cx="15" cy="15" r="1" fill="rgba(255,255,255,0.07)" />
+              <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.06)" />
               </pattern>
               <marker
                 id="arrow"
@@ -390,7 +528,7 @@ export function GraphCanvas({
                 markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#71717a" />
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#52525b" />
               </marker>
               <marker
                 id="arrow-active"
@@ -405,49 +543,49 @@ export function GraphCanvas({
               </marker>
             </defs>
 
-            {/* Grid fills */}
             <rect width="100%" height="100%" fill="url(#gridPattern)" />
 
-            {/* Transformed groups containing nodes/edges */}
             <g transform={`translate(${pan.x}, ${pan.y}) scale(${zoom})`}>
-              {/* Edges */}
+              {/* Edges Link paths */}
               {edges.map((edge) => {
                 const fromCoords = getNodeCoords(edge.from);
                 const toCoords = getNodeCoords(edge.to);
                 const isEdgeHighlighted = highlightedEdges.includes(edge.id) || highlightedEdges.includes(`${edge.to}-${edge.from}`);
+                const isSelected = selectedEdgeId === edge.id;
 
                 const midX = (fromCoords.x + toCoords.x) / 2;
                 const midY = (fromCoords.y + toCoords.y) / 2;
 
                 return (
-                  <g key={edge.id}>
+                  <g key={edge.id} onClick={(e) => { e.stopPropagation(); setSelectedEdgeId(edge.id); setSelectedNodeId(null); }}>
                     <line
                       x1={fromCoords.x}
                       y1={fromCoords.y}
                       x2={toCoords.x}
                       y2={toCoords.y}
-                      className={`stroke-2 transition-all ${
-                        isEdgeHighlighted ? "stroke-amber-500 stroke-[3px]" : "stroke-zinc-700"
+                      className={`stroke-2 cursor-pointer transition-all ${
+                        isEdgeHighlighted ? "stroke-amber-500 stroke-[3px] animate-pulse" : isSelected ? "stroke-purple-500 stroke-2" : "stroke-zinc-700 hover:stroke-zinc-500"
                       }`}
                       markerEnd={edge.directed ? (isEdgeHighlighted ? "url(#arrow-active)" : "url(#arrow)") : undefined}
                     />
-                    <circle cx={midX} cy={midY - 1} r="9" className="fill-zinc-950/80 stroke-border/10" />
-                    <text
-                      x={midX}
-                      y={midY + 2}
-                      className="font-mono text-[9px] font-bold text-center fill-muted-foreground select-none"
-                      textAnchor="middle"
-                    >
-                      {edge.weight}
-                    </text>
+                    <g transform={`translate(${midX}, ${midY})`}>
+                      <circle r="9" className="fill-zinc-950/80 stroke-border/20 stroke" />
+                      <text
+                        className="font-mono text-[9px] font-bold text-center fill-muted-foreground select-none"
+                        textAnchor="middle"
+                        y="3"
+                      >
+                        {edge.weight}
+                      </text>
+                    </g>
                   </g>
                 );
               })}
 
-              {/* Nodes */}
+              {/* Node shapes */}
               {nodes.map((node) => {
-                const isSelected = selectedNode === node.id;
-                const isConnecting = connectingNode === node.id;
+                const isSelected = selectedNodeId === node.id;
+                const isConnecting = connectingNodeId === node.id;
                 const isActive = activeNode === node.id;
                 const isVisited = visitedNodes.includes(node.id);
                 const isPath = pathNodes.includes(node.id);
@@ -461,19 +599,19 @@ export function GraphCanvas({
                 return (
                   <g
                     key={node.id}
-                    onMouseDown={(e) => handleMouseDown(node.id, e)}
-                    onClick={(e) => handleNodeClick(node.id, e)}
-                    className="cursor-grab active:cursor-grabbing group"
+                    onMouseDown={(e) => handleMouseDownNode(node.id, e)}
+                    className="cursor-pointer group"
+                    onDoubleClick={() => { setEditingNodeId(node.id); setNodeRenameVal(node.label); }}
                   >
                     <circle
                       cx={node.x}
                       cy={node.y}
                       r="16"
-                      className={`transition-all ${nodeColorClass} stroke-2 group-hover:stroke-primary/50`}
+                      className={`transition-all ${nodeColorClass} stroke-2 group-hover:stroke-primary/50 shadow-lg`}
                     />
                     <text
                       x={node.x}
-                      y={node.y + 4}
+                      y={node.y + 3.5}
                       className="font-mono text-[9px] text-center font-bold pointer-events-none fill-current"
                       textAnchor="middle"
                     >
@@ -484,53 +622,138 @@ export function GraphCanvas({
               })}
             </g>
           </svg>
-          <span className="absolute bottom-2 left-3 text-[9px] text-muted-foreground/60 select-none">
-            💡 Scroll wheel to zoom. Double-click empty canvas to add nodes. Drag canvas to pan.
-          </span>
+
+          {/* Node Rename popover */}
+          {editingNodeId && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card border border-border p-4 rounded-xl shadow-2xl space-y-3 z-50">
+              <span className="text-xs font-semibold text-foreground">Rename Node Vertex:</span>
+              <form onSubmit={handleRenameNodeSubmit} className="flex gap-2">
+                <Input
+                  value={nodeRenameVal}
+                  onChange={(e) => setNodeRenameVal(e.target.value)}
+                  className="h-8 text-xs w-32"
+                  autoFocus
+                />
+                <Button type="submit" size="sm" className="h-8 text-xs">Save</Button>
+              </form>
+            </div>
+          )}
+
+          <div className="absolute bottom-2 left-3 flex gap-4 text-[9px] text-muted-foreground/60 select-none">
+            <span>🖱️ Middle-drag to Pan</span>
+            <span>🎡 Scroll wheel to Zoom</span>
+            <span>⌨️ Shift-drag snap to 20px grid</span>
+          </div>
         </div>
 
-        {/* Right: Stats & Properties panels */}
-        <div className="md:col-span-4 space-y-4 text-xs">
+        {/* Right Inspector & Stats Column */}
+        <div className="md:col-span-3 space-y-4 text-xs">
+          
+          {/* Element Inspector panel */}
+          <div className="border border-border/40 bg-card/65 p-4 rounded-2xl space-y-3">
+            <h4 className="font-bold text-foreground flex items-center gap-1.5 pb-2 border-b border-border/10">
+              <Info className="h-4 w-4 text-primary" />
+              Inspector Panel
+            </h4>
+            
+            {selectedNodeDetails ? (
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-muted-foreground">Vertex Label:</span>
+                  <span className="font-bold text-foreground">{selectedNodeDetails.label}</span>
+                </div>
+                <div className="flex justify-between items-center border-t border-border/5 pt-2">
+                  <span className="text-muted-foreground">Coordinates:</span>
+                  <span className="font-mono text-foreground">{selectedNodeDetails.x}, {selectedNodeDetails.y}</span>
+                </div>
+                <div className="flex justify-between items-center border-t border-border/5 pt-2">
+                  <span className="text-muted-foreground">Status:</span>
+                  <button
+                    onClick={() => toggleNodeLock(selectedNodeDetails.id)}
+                    className="flex items-center gap-1 text-primary hover:underline cursor-pointer"
+                  >
+                    {selectedNodeDetails.locked ? <Lock className="h-3 w-3" /> : <Unlock className="h-3 w-3" />}
+                    <span>{selectedNodeDetails.locked ? "Locked" : "Unlocked"}</span>
+                  </button>
+                </div>
+              </div>
+            ) : selectedEdgeDetails ? (
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-muted-foreground">From Path:</span>
+                  <span className="font-bold text-foreground">{selectedEdgeDetails.from}</span>
+                </div>
+                <div className="flex justify-between items-center border-t border-border/5 pt-2">
+                  <span className="text-muted-foreground">To Path:</span>
+                  <span className="font-bold text-foreground">{selectedEdgeDetails.to}</span>
+                </div>
+                <div className="flex justify-between items-center border-t border-border/5 pt-2">
+                  <span className="text-muted-foreground">Weight:</span>
+                  <input
+                    type="number"
+                    value={selectedEdgeDetails.weight}
+                    onChange={(e) => {
+                      const nextW = parseInt(e.target.value, 10) || 1;
+                      onChange(
+                        nodes,
+                        edges.map((edge) => (edge.id === selectedEdgeId ? { ...edge, weight: nextW } : edge))
+                      );
+                    }}
+                    className="w-12 h-6 text-center border border-border/30 rounded bg-background text-foreground text-[10px]"
+                  />
+                </div>
+              </div>
+            ) : (
+              <p className="text-muted-foreground/60 italic text-center py-2">Select a vertex or edge to inspect details.</p>
+            )}
+          </div>
+
+          {/* Quick wizard template inserts */}
           <div className="border border-border/40 bg-card/65 p-4 rounded-2xl space-y-3">
             <h4 className="font-bold text-foreground flex items-center gap-1.5 pb-2 border-b border-border/10">
               <Sparkles className="h-4 w-4 text-primary" />
-              Graph Statistics
+              Graph Wizard
             </h4>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Vertices Count:</span>
-                <span className="font-bold text-foreground">{nodes.length}</span>
-              </div>
-              <div className="flex justify-between border-t border-border/5 pt-2">
-                <span className="text-muted-foreground">Edges Count:</span>
-                <span className="font-bold text-foreground">{edges.length}</span>
-              </div>
-              <div className="flex justify-between border-t border-border/5 pt-2">
-                <span className="text-muted-foreground">Connected Components:</span>
-                <span className="font-bold text-foreground">{connectedComponents}</span>
-              </div>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 text-xs cursor-pointer"
+                onClick={() => {
+                  const defaultNodes: NodeItem[] = [
+                    { id: "0", label: "0", x: 120, y: 150 },
+                    { id: "1", label: "1", x: 280, y: 80 },
+                    { id: "2", label: "2", x: 150, y: 260 },
+                    { id: "3", label: "3", x: 320, y: 240 },
+                  ];
+                  const defaultEdges: EdgeItem[] = [
+                    { id: "0-1", from: "0", to: "1", weight: 4, directed: isDirected },
+                    { id: "0-2", from: "0", to: "2", weight: 2, directed: isDirected },
+                    { id: "1-3", from: "1", to: "3", weight: 5, directed: isDirected },
+                    { id: "2-3", from: "2", to: "3", weight: 8, directed: isDirected },
+                  ];
+                  onChange(defaultNodes, defaultEdges);
+                  pushState(defaultNodes, defaultEdges);
+                  toast({ title: "Template Loaded", description: "Default graph template established." });
+                }}
+              >
+                Default Graph
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 text-xs cursor-pointer text-rose-500"
+                onClick={handleClearGraph}
+              >
+                Clear Graph
+              </Button>
             </div>
           </div>
 
-          <div className="border border-border/40 bg-card/65 p-4 rounded-2xl space-y-3">
-            <h4 className="font-bold text-foreground flex items-center gap-1.5 pb-2 border-b border-border/10">
-              <Settings className="h-4 w-4 text-primary" />
-              Quick Actions
-            </h4>
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={() => setConnectingNode(selectedNode)} disabled={!selectedNode} className="w-full cursor-pointer">
-                Add Edge path
-              </Button>
-              <Button variant="outline" size="sm" onClick={handleDeleteNode} disabled={!selectedNode} className="w-full cursor-pointer text-rose-500">
-                Remove Node
-              </Button>
-            </div>
-            <Button variant="outline" size="sm" onClick={handleClearGraph} className="w-full cursor-pointer">
-              Clear All
-            </Button>
-          </div>
         </div>
+
       </div>
+
     </div>
   );
 }
