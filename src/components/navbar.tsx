@@ -6,14 +6,14 @@ import { useLayoutStore } from "@/lib/store";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { AvatarMenu } from "@/features/auth/components/avatar-menu";
 import { Search, Github, HelpCircle, Command } from "lucide-react";
-import { Logo } from "@/components/ui/logo";
+import { Logo } from "@/components/branding/Logo";
+import { LogoBadge } from "@/components/branding/LogoBadge";
 import { useEffect, useState } from "react";
 
 export function Navbar() {
   const pathname = usePathname();
   const { toggleCommandPalette } = useLayoutStore();
   const [osShortcut, setOsShortcut] = useState("Ctrl + K");
-  const isLandingPage = pathname === "/";
 
   useEffect(() => {
     // Determine OS for proper shortcut label
@@ -25,17 +25,12 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between border-b border-border/45 bg-background/60 px-6 backdrop-blur-md">
-      {/* Left side: branding/logo or title */}
-      <div className="flex items-center gap-4">
-        {isLandingPage ? (
-          <Link href="/" className="flex items-center gap-2 font-bold text-primary cursor-pointer">
-            <Logo />
-          </Link>
-        ) : (
-          <h1 className="text-sm font-semibold tracking-tight text-foreground/80 md:block hidden animate-fade-in">
-            Competitive Programming Toolkit
-          </h1>
-        )}
+      {/* Left side: branding/logo */}
+      <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-2 cursor-pointer">
+          <Logo />
+        </Link>
+        <LogoBadge />
       </div>
 
       {/* Middle: Search Box Placeholder (Raycast/Linear Style) */}

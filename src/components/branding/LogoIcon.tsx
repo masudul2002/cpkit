@@ -2,7 +2,9 @@
 
 import * as React from "react";
 
-interface LogoIconProps extends React.SVGProps<SVGSVGElement> {}
+interface LogoIconProps extends React.SVGProps<SVGSVGElement> {
+  className?: string;
+}
 
 export function LogoIcon({ className, ...props }: LogoIconProps) {
   return (

@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
 import { Info, HelpCircle, Heart, Star, Sparkles, Send, Bug, MessageSquare, Terminal } from "lucide-react";
 
-import { LogoIcon } from "@/components/ui/logo-icon";
+import { LogoIcon } from "@/components/branding/LogoIcon";
 
 export default function AboutPage() {
   const { toast } = useToast();

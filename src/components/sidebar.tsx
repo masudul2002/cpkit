@@ -7,7 +7,7 @@ import { useLayoutStore } from "@/lib/store";
 import { sidebarItems } from "@/constants/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { Logo } from "@/components/ui/logo";
+import { Logo } from "@/components/branding/Logo";
 
 export function Sidebar() {
   const pathname = usePathname();

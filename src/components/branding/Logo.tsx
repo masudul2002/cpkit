@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { LogoIcon } from "./logo-icon";
-import { LogoWordmark } from "./logo-wordmark";
+import { LogoIcon } from "./LogoIcon";
+import { LogoWordmark } from "./LogoWordmark";
 
 interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
   showWordmark?: boolean;
@@ -16,4 +16,3 @@ export function Logo({ showWordmark = true, className, ...props }: LogoProps) {
     </div>
   );
 }
-export { LogoIcon, LogoWordmark };
