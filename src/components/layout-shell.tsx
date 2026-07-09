@@ -37,8 +37,8 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
       {/* Main Content Area */}
       <div
         className={cn(
-          "flex-1 flex flex-col transition-all duration-300 ease-in-out",
-          isLandingPage ? "pl-0" : (sidebarCollapsed ? "pl-16" : "pl-64")
+          "flex-1 flex flex-col transition-all duration-300 ease-in-out pl-0",
+          isLandingPage ? "lg:pl-0" : (sidebarCollapsed ? "lg:pl-16" : "lg:pl-64")
         )}
       >
         {/* Top Navbar */}

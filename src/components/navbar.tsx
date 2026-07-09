@@ -5,14 +5,14 @@ import { usePathname } from "next/navigation";
 import { useLayoutStore } from "@/lib/store";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { AvatarMenu } from "@/features/auth/components/avatar-menu";
-import { Search, Github, HelpCircle, Command } from "lucide-react";
+import { Search, Github, HelpCircle, Command, Menu } from "lucide-react";
 import { Logo } from "@/components/branding/Logo";
 import { LogoBadge } from "@/components/branding/LogoBadge";
 import { useEffect, useState } from "react";
 
 export function Navbar() {
   const pathname = usePathname();
-  const { toggleCommandPalette } = useLayoutStore();
+  const { toggleCommandPalette, toggleSidebar } = useLayoutStore();
   const [osShortcut, setOsShortcut] = useState("Ctrl + K");
 
   useEffect(() => {
@@ -24,9 +24,16 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between border-b border-border/45 bg-background/60 px-6 backdrop-blur-md">
+    <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between border-b border-border/45 bg-background/60 px-4 md:px-6 backdrop-blur-md">
       {/* Left side: branding/logo */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 md:gap-3">
+        <button
+          onClick={toggleSidebar}
+          className="p-1.5 rounded-lg hover:bg-accent text-muted-foreground lg:hidden cursor-pointer"
+          aria-label="Toggle navigation drawer"
+        >
+          <Menu className="h-5 w-5" />
+        </button>
         <Link href="/" className="flex items-center gap-2 cursor-pointer">
           <Logo />
         </Link>

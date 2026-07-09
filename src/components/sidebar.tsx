@@ -16,8 +16,10 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-20 flex flex-col border-r border-border/45 bg-card/45 backdrop-blur-md transition-all duration-300 ease-in-out",
-        sidebarCollapsed ? "w-16" : "w-64"
+        "fixed inset-y-0 left-0 z-20 flex flex-col border-r border-border/45 bg-card/90 lg:bg-card/45 backdrop-blur-md transition-all duration-300 ease-in-out lg:w-64",
+        sidebarCollapsed 
+          ? "w-0 -translate-x-full lg:translate-x-0 lg:w-16 lg:flex overflow-hidden" 
+          : "w-64 translate-x-0"
       )}
     >
       {/* Sidebar Header / Branding */}
