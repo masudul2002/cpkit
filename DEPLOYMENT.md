@@ -1,16 +1,12 @@
-# CPKit Production Deployment Guide
+# CPKit Deployment
 
-This document describes how to deploy CPKit to production platforms.
+CPKit is configured for static web hosting.
 
----
+## Building for Production
+Run the compile command:
+```bash
+npm run build
+```
 
-## 🚀 Vercel Deployment
-
-CPKit is optimized for Vercel Next.js static pages exports.
-
-1. **Import Repository**: Link your GitHub repository to your Vercel team dashboard.
-2. **Compile Command**:
-   - Build command: `next build`
-   - Output directory: `.next`
-3. **Environment variables**:
-   - Ensure `NODE_ENV=production` is initialized.
+## Vercel Deployment
+To deploy to Vercel, link your repository and trigger builds using Next.js defaults.

@@ -1,23 +1,16 @@
 ---
-name: 🐛 Bug Report
-about: Create a report to help us improve CPKit stability.
-title: "[BUG] "
+name: Bug report
+about: Create a report to help us improve.
+title: 'bug: '
 labels: bug
-assignees: ""
+assignees: ''
 ---
 
 **Describe the bug**
 A clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '/...'
-2. Drag point to '...'
-3. See error
+Steps to reproduce the behavior.
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
-
-**Desktop/Smartphone:**
-- OS: [e.g. iOS, Windows]
-- Browser [e.g. chrome, safari]

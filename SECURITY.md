@@ -1,7 +1,7 @@
-# CPKit Security Policy
+# Security Policy
 
-If you discover a security vulnerability, please do not open a public issue.
+## Supported Versions
+Only the latest release (v1.0.0-stable and above) receives security updates.
 
-## Reporting
-
-Email details to MD. Masudul Hasan. We aim to address security fixes within 48 hours.
+## Reporting a Vulnerability
+Please do not report security vulnerabilities via public GitHub issues. Instead, contact the maintainers directly or open a draft security advisory on GitHub.
