@@ -8,6 +8,7 @@ import { sidebarItems } from "@/constants/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Logo } from "@/components/branding/Logo";
+import { APP_VERSION } from "@/constants/branding";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -34,7 +35,7 @@ export function Sidebar() {
           <Logo showWordmark={!sidebarCollapsed} />
           {!sidebarCollapsed && (
             <span className="text-[10px] text-muted-foreground border border-muted-foreground/30 px-1 rounded uppercase tracking-widest">
-              v1.6.0
+              v{APP_VERSION}
             </span>
           )}
         </Link>

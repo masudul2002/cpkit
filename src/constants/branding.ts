@@ -1,0 +1,9 @@
+export const APP_VERSION = "1.0.0-beta";
+export const APP_NAME = "CPKit";
+export const APP_TAGLINE = "Everything a Competitive Programmer Needs";
+export const GITHUB_REPO = "https://github.com/masudul2002/cpkit";
+export const LICENSE_NAME = "MIT License";
+export const LICENSE_URL = "https://github.com/masudul2002/cpkit/blob/main/LICENSE";
+export const AUTHOR_NAME = "MD. Masudul Hasan";
+export const AUTHOR_DEPT = "Department of Computer Science & Engineering";
+export const AUTHOR_UNIV = "Sunamganj Science and Technology University";

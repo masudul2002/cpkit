@@ -3,6 +3,15 @@
 import * as React from "react";
 import { ExternalLink, Heart } from "lucide-react";
 import { Logo } from "@/components/branding/Logo";
+import {
+  APP_VERSION,
+  GITHUB_REPO,
+  LICENSE_NAME,
+  LICENSE_URL,
+  AUTHOR_NAME,
+  AUTHOR_DEPT,
+  AUTHOR_UNIV
+} from "@/constants/branding";
 
 export function Footer() {
   const platforms = [
@@ -19,13 +28,13 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-border/10 pb-4">
           <div className="flex items-center gap-3">
             <Logo className="h-5 w-5" />
-            <span className="font-semibold text-foreground">v1.6.1</span>
+            <span className="font-semibold text-foreground">v{APP_VERSION}</span>
             <span className="text-border/40">•</span>
-            <a href="https://github.com/masudul2002/cpkit/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
-              MIT License
+            <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              {LICENSE_NAME}
             </a>
             <span className="text-border/40">•</span>
-            <a href="https://github.com/masudul2002/cpkit" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+            <a href={GITHUB_REPO} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
               GitHub
             </a>
           </div>
@@ -52,10 +61,10 @@ export function Footer() {
             <span>Made with</span>
             <Heart className="h-3 w-3 fill-rose-500 text-rose-500" />
             <span>by</span>
-            <span className="font-bold text-foreground">MD. Masudul Hasan</span>
+            <span className="font-bold text-foreground">{AUTHOR_NAME}</span>
           </div>
           <div>
-            <span>Department of Computer Science & Engineering • Sunamganj Science and Technology University</span>
+            <span>{AUTHOR_DEPT} • {AUTHOR_UNIV}</span>
           </div>
         </div>
 
