@@ -1,6 +1,6 @@
 export const BRAND_CONFIG = {
   name: "CPKit",
-  version: "1.6.1",
+  version: "1.6.2",
   tagline: "Everything a Competitive Programmer Needs",
   primaryColor: "#2563EB",
   secondaryColor: "#7C3AED",
