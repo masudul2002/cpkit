@@ -1,15 +1,7 @@
-import { BookOpen } from "lucide-react";
+"use client";
+
+import { RefDashboard } from "@/features/reference/components/ref-dashboard";
 
 export default function QuickReferencePage() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-[50vh] border border-dashed border-border/60 rounded-xl bg-card/25 p-8 text-center space-y-4">
-      <div className="p-3 bg-primary/10 rounded-full text-primary">
-        <BookOpen className="h-6 w-6" />
-      </div>
-      <h2 className="text-2xl font-bold tracking-tight">Quick Reference</h2>
-      <p className="text-sm text-muted-foreground max-w-sm">
-        Cheatsheets for time complexities, standard template snippets, and quick formulas. Ready for implementation.
-      </p>
-    </div>
-  );
+  return <RefDashboard />;
 }
