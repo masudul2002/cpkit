@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { ExternalLink, Heart } from "lucide-react";
+import { Heart, Github, ExternalLink } from "lucide-react";
 import { Logo } from "@/components/branding/Logo";
+import { VersionBadge } from "@/branding/version-badge";
 import {
-  APP_VERSION,
   GITHUB_REPO,
   LICENSE_NAME,
   LICENSE_URL,
@@ -14,57 +14,81 @@ import {
 } from "@/constants/branding";
 
 export function Footer() {
-  const platforms = [
-    { name: "Codeforces", url: "https://codeforces.com" },
-    { name: "AtCoder", url: "https://atcoder.jp" },
-    { name: "LeetCode", url: "https://leetcode.com" },
+  const quickLinks = [
+    { name: "GitHub Repository", url: GITHUB_REPO, external: true },
+    { name: "Documentation", url: "/docs", external: false },
+    { name: "Project Roadmap", url: "/releases", external: false },
+    { name: "Report a Bug", url: `${GITHUB_REPO}/issues/new`, external: true },
   ];
 
   return (
-    <footer className="mt-auto border-t border-border/45 bg-card/25 py-6 px-6">
-      <div className="flex flex-col gap-6 text-xs text-muted-foreground max-w-7xl mx-auto">
+    <footer className="mt-auto border-t border-border/45 bg-card/25 py-8 px-6 font-sans">
+      <div className="max-w-7xl mx-auto flex flex-col gap-8">
         
-        {/* Top section: Brand, Links and Platforms */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-border/10 pb-4">
-          <div className="flex items-center gap-3">
-            <Logo className="h-5 w-5" />
-            <span className="font-semibold text-foreground">v{APP_VERSION}</span>
-            <span className="text-border/40">•</span>
-            <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
-              {LICENSE_NAME}
-            </a>
-            <span className="text-border/40">•</span>
-            <a href={GITHUB_REPO} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
-              GitHub
+        {/* Top Segment: 3-Column Grid */}
+        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-12 border-b border-border/10 pb-8">
+          
+          {/* Left Column: Branding */}
+          <div className="lg:col-span-4 flex flex-col items-start gap-3">
+            <div className="flex items-center gap-2">
+              <Logo showWordmark={true} />
+              <VersionBadge variant="compact" />
+            </div>
+            <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
+              Everything a Competitive Programmer Needs. A professional open-source toolkit.
+            </p>
+            <a
+              href={LICENSE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Licensed under {LICENSE_NAME}
             </a>
           </div>
 
-          <div className="flex items-center gap-4">
-            {platforms.map((p) => (
-              <a
-                key={p.name}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-0.5 hover:text-foreground transition-colors"
-              >
-                <span>{p.name}</span>
-                <ExternalLink className="h-3 w-3" />
-              </a>
-            ))}
+          {/* Middle Column: Developer */}
+          <div className="lg:col-span-5 flex flex-col items-start gap-2.5">
+            <span className="text-xs font-bold text-foreground/80 tracking-wide uppercase">Developer</span>
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <span>Made with</span>
+              <Heart className="h-3.5 w-3.5 fill-rose-500 text-rose-500 animate-pulse" />
+              <span>by</span>
+              <span className="font-semibold text-foreground">{AUTHOR_NAME}</span>
+            </div>
+            <div className="text-[11px] text-muted-foreground/75 leading-relaxed">
+              <p>{AUTHOR_DEPT}</p>
+              <p>{AUTHOR_UNIV}</p>
+            </div>
           </div>
+
+          {/* Right Column: Links */}
+          <div className="lg:col-span-3 flex flex-col items-start gap-3">
+            <span className="text-xs font-bold text-foreground/80 tracking-wide uppercase">Quick Links</span>
+            <div className="flex flex-col gap-1.5 w-full">
+              {quickLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                >
+                  <span>{link.name}</span>
+                  {link.external && <ExternalLink className="h-3 w-3 opacity-60" />}
+                </a>
+              ))}
+            </div>
+          </div>
+
         </div>
 
-        {/* Bottom section: Credits */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-[11px] text-muted-foreground/80">
-          <div className="flex items-center gap-1">
-            <span>Made with</span>
-            <Heart className="h-3 w-3 fill-rose-500 text-rose-500" />
-            <span>by</span>
-            <span className="font-bold text-foreground">{AUTHOR_NAME}</span>
-          </div>
-          <div>
-            <span>{AUTHOR_DEPT} • {AUTHOR_UNIV}</span>
+        {/* Bottom Segment: Copyright */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-muted-foreground/75">
+          <span>&copy; {new Date().getFullYear()} CPKit. All rights reserved.</span>
+          <div className="flex items-center gap-4">
+            <a href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</a>
+            <a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a>
           </div>
         </div>
 
