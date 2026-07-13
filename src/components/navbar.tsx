@@ -23,9 +23,29 @@ export function Navbar() {
     }
   }, []);
 
+  const getPageTitle = () => {
+    if (pathname === "/dashboard") return "Dashboard";
+    if (pathname.startsWith("/graph")) return "Graph Laboratory";
+    if (pathname.startsWith("/contest-utilities")) return "Contest Utilities";
+    if (pathname.startsWith("/debug-tools")) return "Debug Tools";
+    if (pathname.startsWith("/settings")) return "Settings";
+    if (pathname.startsWith("/workspace")) return "Workspace";
+    if (pathname.startsWith("/tree")) return "Tree Laboratory";
+    if (pathname.startsWith("/matrix")) return "Matrix Laboratory";
+    if (pathname.startsWith("/dynamic-programming") || pathname.startsWith("/dp")) return "Dynamic Programming";
+    if (pathname.startsWith("/greedy")) return "Greedy Visualizer";
+    if (pathname.startsWith("/number-theory")) return "Number Theory";
+    if (pathname.startsWith("/strings")) return "Strings";
+    if (pathname.startsWith("/search")) return "Search Algorithms";
+    if (pathname.startsWith("/sorting")) return "Sorting Algorithms";
+    if (pathname.startsWith("/geometry")) return "Geometry Laboratory";
+    if (pathname.startsWith("/reference") || pathname.startsWith("/quick-reference")) return "Quick Reference";
+    return "CPKit";
+  };
+
   return (
     <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between border-b border-border/45 bg-background/60 px-4 md:px-6 backdrop-blur-md">
-      {/* Left side: branding/logo */}
+      {/* Left side: page title / drawer toggle */}
       <div className="flex items-center gap-2 md:gap-3">
         <button
           onClick={toggleSidebar}
@@ -34,10 +54,9 @@ export function Navbar() {
         >
           <Menu className="h-5 w-5" />
         </button>
-        <Link href="/" className="flex items-center gap-2 cursor-pointer">
-          <Logo />
-        </Link>
-        <LogoBadge />
+        <span className="font-semibold text-foreground tracking-tight pl-1">
+          {getPageTitle()}
+        </span>
       </div>
 
       {/* Middle: Search Box Placeholder (Raycast/Linear Style) */}
